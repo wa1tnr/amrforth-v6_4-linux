@@ -1,0 +1,1860 @@
+HISTORY and TODO List for amrFORTH v6
+
+***** TODO
+
+* Change the appnotes to reflect the new model for the data stack, i.e.
+cached in the R2:ACC register pair.
+
+* Document the new code interface to TOS for the website and online
+help files.
+
+* Semi-automatic archiving of projects.
+
+*** Less critical, future wish list ***
+
+* Multitasker.  Need to put stacks in external RAM.  The return stack
+can go there if we code nest and exit specially.  Need to think it
+through though concerning recursion and exit inside a definition.  It
+may turn out that we never need a multitasker and this is never
+addressed.
+
+* Parser for BASIC to allow statements without spaces. (how? why?)
+
+* Error messages, syntax error in BASIC (interpreter). (part of parser?)
+
+
+*******************
+***** HISTORY *****
+*******************
+
+** Mon Aug  2 11:55:21 PDT 2004 zip082
+-- Now using the revised version of Gforth 0.6.2.  It now works in
+Windows 95, 98, and ME.
+
+** Tue Jul  6 11:10:13 PDT 2004 zip081
+-- Distributed kernel8051.fs to all the source directories, ran
+prepinstall, ready to release now.
+
+** Fri Jul  2 12:42:50 PDT 2004 zip080
+-- Changed definitions of < and u<, based on what I learned in the book
+"Hacker's Delight", by Henry S. Warren, Jr..  Each definition is both
+smaller and faster.
+
+** Thu May 20 15:06:53 PDT 2004 zip079
+-- Officially changed the name to v6.4.x.  This also means the homepath
+is now /amrforth/v6_4/.  Fixed the problem downloading to the ADuC812 in
+Windows.  Also fixed the Windows problem where the GUI doesn't get focus
+until you click on it with the mouse.  Now it does 'focus -force $log'
+and forces Windows to give it focus.
+
+** Mon May 17 11:47:18 PDT 2004 zip078
+-- Added 'show-internal-ram', done in code to affect the stacks as
+little as possible.  Both this word and 'mark-stacks' are commented out
+by default.  Uncomment them as needed.
+
+** Mon May 17 11:09:43 PDT 2004 zip077
+-- Added the code word 'mark-stacks' to debug.fs.  Comment it out if not
+needed.  It marks the return and data stacks in internal memory so you
+can use '0 256 dump' to see how they have been used, how much free space
+there is.  A good example would be '$5aa5 mark-stacks'.  This would put
+$a5 in all the data and return stack locations, and $5a in all the
+variable locations in internal memory.  You can also see how the
+variables are being used.
+
+** Fri May 14 15:44:42 PDT 2004 zip076
+-- Sped up the display in the word 'listen' in amrforth.tcl.  Instead of
+writing one character at a time as they are received, now we batch them
+until a linefeed is received and write the whole line at once.  The
+speedup is dramatic!
+
+** Mon May 10 15:51:03 PDT 2004 zip075
+* Change and document library files to reflect the new TOS interface.
+-- This has been done, including a README file in ~/amrforth/v6_3/lib
+that explains the new data stack format.
+
+** Mon May 10 15:27:04 PDT 2004 zip074
+* JTAG code not yet converted to v6.3.
+-- Now it has been converted to v6.3 stack format and tested.
+
+** Mon May 10 14:40:39 PDT 2004 zip073
+-- Removed the exact font choice, it didn't allow the config module to
+change fonts properly.  Address this again in the future.
+
+** Mon May 10 14:15:16 PDT 2004 zip072
+-- Added b. and bb. to debug.fs.  Bb. is binary byte, similar to hb..
+
+** Thu Apr 29 13:38:56 PDT 2004 zip071
+-- Fixed single stepper to handle strings, such as 's" This string"'.
+
+** Thu Apr 29 11:03:45 PDT 2004 zip070
+-- Added option to specify an exact font name of your choice by creating
+a file called 'myfont.tcl' in the local directory.
+
+** Mon Apr 26 11:47:17 PDT 2004 zip069
+-- Fixed 'at' in amrforth.tcl so that 'step' will work on a 552.  It was
+an addressing problem where the 552 memory has a $8000 byte offset.
+
+** Mon Apr 26 10:45:48 PDT 2004 zip068
+-- _Now_ the disassembler displays string correctly.  Also added
+'distribute-all' to be sure each subdirectory of /amrforth/v6_3/ has the
+latest files after a change has been made.
+
+** Wed Apr 21 13:55:21 PDT 2004 zip067
+-- Now the disassembler displays strings (s") correctly, including the
+actual string in red.  No, this didn't get saved until 068!
+
+** Wed Apr 21 13:08:45 PDT 2004 zip066
+-- Fixed 'edit-source' so that it changes the candidate string to
+lowercase before comparing to line in 'tags.log'.
+
+** Tue Apr 20 16:34:48 PDT 2004 zip065
+-- Added (and commented out) 'rdepth' and '.rs', a return stack dump, to
+debug.fs.  It can be useful for debugging, once you understand how the
+return stack is used in a call threaded forth.
+
+** Mon Apr 19 14:47:56 PDT 2004 zip064
+-- Added the command 'distribute' which copies the same file to each of
+the subdirectories of /amrforth/v6_3/, so that when there is a change in
+amrforth I can distribute that change to the whole system at once.
+
+** Mon Apr 19 13:15:20 PDT 2004 zip063
+-- The proc 'at' in amrforth.tcl didn't work for the 80c552 or the
+80c537 because of the 8k offset to rom-start, so SEE was broken.  This
+has been fixed.
+
+** Fri Mar 19 10:36:54 PST 2004 zip062
+-- Added to the todo list above.
+
+** Thu Mar 11 10:44:59 PST 2004 zip061
+-- Fixed a bug in <.
+
+** Tue Mar  9 11:13:14 PST 2004 zip060
+-- Added 'emit' to the list of kernelwords for the single stepper even
+when the interrupts kernel is being used.
+
+** Thu Feb 26 15:44:02 PST 2004 zip059
+-- Modified '?init-interrupts' to omit $52 # SCON mov.  It wasn't right
+for the Cygnal and not needed for anything else.  Also a bug was fixed
+in 'key?' for the serial-interrupts kernel.  A dup was added to avoid a
+stack underflow.
+
+** Thu Feb 26 12:07:51 PST 2004 zip058
+-- Added two commands to hostforth, 'listen' and 'timer'.  'listen'
+monitors the serial line and print what comes across, just as if you
+were executing a word, but it also prints a time/date stamp after each
+linefeed.  If you are running a turnkeyed application that spits out
+serial info, this is how to log it.  'timer' toggles a timing variable
+that determines whether or not each command will be timed and the timing
+reported on the end of the command line.  It uses the Tcl millisecond
+timer, and that determines its accuracy.
+
+** Wed Feb 25 16:16:02 PST 2004 zip057
+-- Found bug in serial-interrupts kernel.  The input buffer was not
+being reserved, so variables would overwrite it.  Fixed in
+'metacomp.fs'.
+
+** Mon Feb 23 11:10:02 PST 2004 zip056
+-- The metacompiler now fills memory with all bits set, $ff, instead of
+with all bits clear, 0.  This imitates an erased ROM or flash memory.
+
+** Fri Feb 20 12:37:13 PST 2004 zip055
+-- Fixed a bug in um/mod.  When converting to top of stack in registers,
+inadvertently used B instead of R2 when pushing the remainder onto the
+data stack.  That has been fixed.  The bug also affected mod and /mod.
+
+** Wed Feb 11 12:37:32 PST 2004 zip054
+-- Made sure the keypad and lcd code also works on the 552 developer's
+system, which lacks the inverters on the 552 kit board.  Just change the
+value of INVERTED in the file iic552.fs.
+
+** Tue Feb 10 16:30:03 PST 2004 zip053
+-- Made the 16key.fs code work for the 552 kit board, in 552/example.
+
+** Mon Feb  9 12:30:21 PST 2004 zip052
+-- Changed HISTORY.TXT, README.TXT, README.linux, and README.windows to
+all lowercase.  Edited and tested the iic552.fs and lcd.fs code in the
+552/example directory.  They work with the 552 kit board, which has
+inverters between the LCD and the i2c port expanders.
+
+** Fri Feb  6 16:24:01 PST 2004 zip051
+-- Removed a spurious file from the main directory.  It was there by
+accident.
+
+** Fri Feb  6 16:22:19 PST 2004 zip050
+-- Updated the README files.
+
+** Wed Feb  4 16:33:41 PST 2004 zip049
+-- Testing installation, found and fixed errors in 'prepinstall' script.
+Reconfigured 300/basic directory, forgotten earlier.
+
+** Wed Feb  4 11:29:57 PST 2004 zip048
+-- Made depth and .s work for 8031 with 128 bytes RAM.  Also properly
+initialized stack pointers.
+
+** Wed Feb  4 10:51:27 PST 2004 zip047
+-- Changed the initial stack pointers from SP0=$fd and RP0=$7f to
+SP0=$00 and RP0=$80.  No bytes are wasted now to protect from stack
+underflows while testing.  In the process found that depth and therefore
+.s were not correct and fixed them too.  The change in pointers was
+suggested by Wolfgang Allinger.
+
+** Tue Feb  3 17:06:10 PST 2004 zip046
+-- Went through all the subdirectories and ran configured for the right
+processor, after updating the source files.
+
+** Tue Feb  3 14:57:40 PST 2004 zip045
+-- When using a Cygnal chip, the compiler had assumed that a bootloader
+existed in page 1, though the reset vector at address 0 contained a jump
+to address $200.  Now all possible interrupt vectors are also pointed
+into page 1 so that a turnkeyed program will still work when downloaded
+via JTAG.  Updated the README files and prepinstall to create the proper
+directories (v6_3).
+
+** Tue Feb  3 14:01:33 PST 2004 zip044
+-- Changed v6.3 to v6_3 in 'homepath' in amrforth.tcl.  Wrapped .id, [[
+and ]] in nowarn,warn to suppress the not unique message when compiling
+with gforth version 0.6.2.
+
+** Fri Jan 30 15:59:30 PST 2004 zip043
+-- The README.windows file was wrong in the way it explained making a
+desktop shortcut icon to run amrforth.  It has been fixed.  All the
+readme files still refer to version 6.1, need to be changed to 6.3.
+
+** Mon Jan 26 16:16:21 PST 2004 zip042
+-- Two changes.  In ], the target compiler, the target vocabulary is
+searched now before the immed vocabulary.  Now a target word can
+override its immed equivalent.  For example using the word i in the
+morse code demo.  Some word names have also been changed in the kernel
+to reflect the change in search order.  For example, the words i and r@
+are immediate.  They compile calls to (r@) with parens.  This is
+maintain consistency with words such as next compiling (next), and to
+prevent the target word, (r@), from taking precedence over the immed
+word, r@ or i.  The other change is that the Tcl interpret made it hard
+to interpret words with the $, {, or } characters, and maybe other
+special characters too.  Words are now filtered as they are read into
+Tcl so that the special list characters are no longer added, and the
+exact word can be interpreted with the special characters intact.  When
+you type 'words' you still get special characters added.  That will have
+to be fixed another day.
+
+** Fri Jan 23 11:17:06 PST 2004 zip041
+-- Incorporated Wolfgang Allinger's comments in the file kernel8051.fs,
+with a few minor changes.  We hope this makes a few things more clear to
+people trying to learn how amrFORTH works and what you can do to break
+it (or better yet, _not_ break it) in code words.
+
+** Fri Jan 16 11:49:07 PST 2004 zip040
+-- The documentation, help files, still refer to v6 in general, not v6.3
+specifically.  Made sure that all documentation directories are v6 and
+not v6.3.  As documentation is updated, the v6 directory name should
+probably be changed to v6.3, both on the website and in the release.
+
+** Fri Jan 16 11:19:26 PST 2004 zip039
+-- Added a couple of files to 017/example to test um* and compare
+against gforth on the host computer.
+
+** Thu Jan 15 15:54:12 PST 2004 zip038
+-- Modified the prepinstall script so that the new release will be v6.3
+instead of v6.
+
+** Thu Jan 15 15:05:37 PST 2004 zip037
+-- Finished converting and testing lib files for v6.3.
+
+** Thu Jan 15 14:39:57 PST 2004 zip036
+-- Finally decided to put s" back into the kernel.  I find that I very
+often want to use it.  The file debug.fs also includes ." now, which
+types to the serial port.  It costs nothing until used as long as type
+has already been defined, and it is in debug.fs.
+
+** Thu Jan 15 11:07:13 PST 2004 zip035
+-- Tested BASIC demo, found a bug, where the conversion was not
+complete, fixed it.  Altered copyright notices in all source files to
+include year 2004.
+
+** Wed Jan 14 16:55:03 PST 2004 zip034
+-- Converted basic.fs to work in v6.3.  Still needs some testing.
+
+** Wed Jan 14 15:35:18 PST 2004 zip033
+-- Copied 552.bin from the windows system directory.  Burn this into a
+rom to use for downloading to the 80c552.  Went through all the chip
+specific directories testing bootloaders and examples.  V6.3 is ready to
+release, except for documentation of the Top of Stack interface.
+From the wish list:
+1) Change directory structure with for version 6.3 so that each new
+version is in a separate directory.  We won't need to lose the older
+version.  DONE.
+2) Add a disassembler/decompiler in Tcl/Tk.  The main tools are already
+there for the single step debugger.  The disassembler will help with
+debugging the next item.  DONE.
+3) Change the kernel so that the top of stack (TOS) is kept in the A,R2
+register pair.  Code size will go down and speed will go up,
+significantly.  DONE.
+
+** Wed Jan 14 12:11:29 PST 2004 zip032
+-- Realized (again) that c and t should not automatically download.
+Added the r command for Run that compiles and then automatically
+downloads.  C and T are back to their original behavior.
+
+** Wed Jan 14 11:25:01 PST 2004 zip031
+-- Added serial interrupt code, converted from v6.2.  It no longer uses
+the second register bank to access the head or tail pointers at
+addresses 8 and 9.  This was a potential bug if other interrupts of
+higher priority exist and don't restore the page bits in PSW.  Thanks to
+Wolfgang Allinger for pointing out this bug.
+
+** Tue Jan 13 16:17:53 PST 2004 zip031
+-- Cleaned of source code in amrforth.tcl.
+
+** Tue Jan 13 15:25:44 PST 2004 zip031
+-- Noticed that #or and #xor were defined same as #and.  Fixed them.
+
+** Tue Jan 13 14:22:18 PST 2004 zip030
+-- Fixed the bug that kept words such as ?dup from being seen or
+stepped.  Quit using regexp and instead used 'string first .... == 0'.
+
+** Tue Jan 13 13:46:31 PST 2004 zip029
+-- Now the c and t commands also automatically download, as it was in
+version 5.  Added 'Update Project' to the 'New Project' and 'Open
+Project' menu.  New Project won't overwrite the old system if it is
+already there.  Update Project will.
+
+** Mon Jan 12 16:06:59 PST 2004 zip028
+-- Worked on 16key.fs and lcd.fs conversions.  Nothing tested yet.
+
+** Fri Jan  9 16:50:46 PST 2004 zip027
+-- Copied files from ~/Projects/ethernet/ where I was working on the
+ethernet gadget, using the prototype v6.3.  Started converting some of
+the 552 library code to work for v6.3.  Modified mw.fs and mw-ee.fs in
+~/amrforth/v6.3/552/example/.  Not tested yet.
+
+** Tue Dec 16 16:02:00 PST 2003 zip026
+-- Had to modify 'dis' to allow tcl to recognize numbers in hex format,
+that is, 0xNNNN.
+
+** Tue Dec 16 15:41:59 PST 2003 zip025
+-- Changed .s to .sh in single stepper, wanted to to hex addresses.
+Added 'dis' to disassemble starting at an arbitrary address, instead of
+'see'ing at a word.  This is to disassemble the interrupt vectors in an
+application.  Commented out a 'precreate' in the definition of variable
+that was causing not unique messages for each variable.  Added an atmel
+entry for deciding how to define int!.
+
+** Fri Dec  5 11:52:48 PST 2003 zip024
+-- Added the new sfr-C51RC2.fs file to the copy_scripts procedure in
+amrforth.tcl, for new projects.
+
+** Fri Dec  5 11:14:19 PST 2003 zip023
+-- Fixed serious bug in um*, where the new byte order on the stack had
+not been taken into account.  Need a reliable test for both um* and
+um/mod to increase confidence in their correctness.
+
+** Thu Dec  4 11:54:23 PST 2003 zip022
+#### fileserver is down, saved only home directory to floppy ####
+-- Added the bootloader for atmel 8051 parts, downloader-atmel.tcl.
+
+** Wed Dec  3 16:50:40 PST 2003 zip021
+#### fileserver is down, saved only home directory to floppy ####
+-- Added sfr-C51RC2.fs for the Atmel 8051.  Included a profile for same
+in the config program.  Still need to make a downloader for the Atmel
+parts.  Using the Atmel 'flip' program, in Linux by the way, I installed
+a minimal kernel in the Atmel part and successfully interpreted some
+things, like .s.
+
+** Tue Dec  2 11:39:02 PST 2003 zip020
+-- Fixed bug in single stepper.  Again now makes an entry in
+steppersource.log, the address to jump to in a branch such as compiled
+by again is correctly read, unless it happens to be an sjmp.  That will
+have to be fixed as well.
+
+** Mon Dec  1 15:32:29 PST 2003 zip019
+-- Removed reference to inline.fs from compile.fs and deleted a
+redundant definition of flip in kernel8051.fs.
+
+** Tue Nov 25 12:21:08 PST 2003 zip018
+-- Added a header to the disassembler/decompiler to identify the
+columns, "addr code    mnemonic   word    cycles" is displayed on a line
+after each label (the beginning of a word definition).
+
+** Tue Nov 25 10:28:03 PST 2003 zip017
+-- Added the until versions; dupuntil, dup0=until, dup0<until.  Also
+added dup0>until and dup0>if.  Finally, added 1-dup0=until, which
+compiles a single instruction, ACC -zero until, for looping up to 256
+times based on the value in the low byte of TOS, namely the A register.
+Also some minor bug fixeds in the disassembler.
+
+** Mon Nov 24 13:19:52 PST 2003 zip016
+-- Added a column to the disassembler that indicates the number of
+cycles the instruction takes to execute.  For jumps and calls only the
+time for that instruction is shown, not for the whole subroutine.  (That
+would be hard to do).  This will help the programmer to compare
+different versions of a word to find the most efficient one.  Also the
+following immediate words have been added which compile inline code.
+They each take the same or less bytes than their high level equivalents
+and execute significantly faster.  No conditional compiling is required.
+They don't take space on the target until they are used.  The words are:
+dupif, dup0=if, dup0<if, dup>r, r>drop.  Similar versions for while and
+until are coming.
+
+** Fri Nov 21 11:48:28 PST 2003 zip015
+-- Streamlined r@ to save memory.  Added some inline conditionals that
+save memory and increase speed in certain cases.  They are assembler
+macros that cost nothing if not used.  See -if, -until, -while, |then,
+|begin, and |repeat, it the file kernel8051.fs.
+
+** Thu Nov 20 15:00:21 PST 2003 zip014
+-- Made flip and invert compile as calls to keep program size smaller
+and allow the single stepper and interpreter to work without tricks.
+Also made high level 1+ and 1- to save memory.
+
+** Thu Nov 20 14:23:08 PST 2003 zip013
+-- The kernel has been simplified.  Only automatic tail recursion
+optimization remains.  The disassembler has been repaired to show
+literals properly.  The single stepper has been repaired to show
+literals properly.
+
+** Wed Nov 19 16:18:07 PST 2003 zip012
+-- We have decided to make v6.3 as small as possible by default.  We
+will include inlining tools as well as the assembler for speeding up the
+critical loops.  The only automatic optimization is and will be the
+efficient tail recursion, in ; and exit.  The optimizing literal has
+been removed.
+
+** Tue Nov 18 15:46:49 PST 2003 zip011
+-- Made some progress restoring the single stepper.  The new style
+literal is now handled correctly.
+
+** Tue Nov 18 11:54:41 PST 2003 zip010
+-- Added assembler macros #and, #or, and #xor, to code literal to TOS
+logic inline as a hand optimization, as in  [asm] $ff #and ].  The
+latest kernel also automatically optimizes when a literal follows a
+drop, eliminating both the drop and the dup that is usually part of the
+literal.  These will need to be handled specially by the single-stepper.
+
+** Tue Nov 18 10:19:29 PST 2003 zip009
+-- Now the TOS is cached in A,B.  This makes for many changes in
+kernel8051.fs, and some in disassembler.tcl.  The single stepper is
+temporarily partially broken, but fairly easy to fix.  The kernel is
+both smaller and faster.  A few bugs in the disassembler were found and
+fixed along the way.
+
+** Thu Nov 13 12:56:41 PST 2003 zip008
+-- Fleshed out the disassembler/decompiler so that it shows values for #
+and direct, and shows the name of a forth word to be called or jumped
+to.  Also inline literals are handled properly, lit, clit, and s".  When
+you execute 'see', the source code for the word is also displayed in the
+edit window.
+
+** Wed Nov 12 17:28:45 PST 2003 zip007
+-- Added labels and run from menu.
+
+** Wed Nov 12 16:59:20 PST 2003 zip006
+-- All assembler instructions included.  Not handling labels nor jump
+addresses yet.  Also not handling higher lever forth literals yet.
+
+** Wed Nov 12 15:23:09 PST 2003 zip005
+-- More of the disassembler working, the add instructions and pressing a
+key until ESC.
+
+** Wed Nov 12 12:41:30 PST 2003 zip004
+-- Got started coding the disassembler.  Just a proof of concept so far.
+
+** Mon Nov  3 12:38:43 PST 2003 zip003
+-- Figured out how to use hex numbers in Tcl.  Added tcl conversion
+words 'hex' and 'decimal' and used them in the single stepper.  The key
+is to remember that in Tcl everything tries to be a string, so the
+string "65" is not equal to the string "0x41" for example.
+
+** Mon Nov  3 12:01:58 PST 2003 zip002
+-- Changed 'proc at' in amrforth.tcl so that if the target is attached
+and responsive, the value is fetched from the target.  Otherwise the
+value is fetched from the target-image on the host.  This is used by the
+single stepper and will be used by the disassembler.
+
+** Fri Oct 31 11:49:16 PST 2003 zip001
+-- This is the first save of version 6.3.  It is nearly identical to
+zip323 below, except that it originates in the v6.3 directory and
+references to v6 have been changed to v6.3.  Now we start adding the
+v6.3 features, namely the disassembler and caching TOS in registers.
+Note that the numbering starts fresh at 001, because we are in a
+different directory and the file names being saved have a 6.3 in them.
+
+***************************************
+***************************************
+***************************************
+
+** Thu Oct 30 13:04:07 PST 2003 zip323
+-- Finished going through the ~/amrforth/v6/ subdirectories, 300, 310,
+017, and 061, to test the new system and be sure the boot images are
+still created correctly and so forth.  Removed all the CVS directories,
+since we have (temporarily?) given up on using CVS.
+
+** Thu Oct 30 12:14:44 PST 2003 zip322
+-- Fixed a bug in qsource that kept the BASIC interpreter from working.
+Also modified show-basic-words so that colors are used and so that
+hostbasic words are at the top, similar to forth's show-words.
+
+** Wed Oct 29 12:17:59 PST 2003 zip321
+-- Added one more test in single stepper unnest to handle a jump at the
+end of a word correctly.
+
+** Tue Oct 28 16:12:02 PST 2003 zip320
+-- The following two entries come from the ~/Projects/amr/changing/
+directory where I test new features now.  
+***************************************
+Tue Oct 28 13:25:04 PST 2003 zip028 Chas
+-- Implemented KEY, simulated on the host, triggered by the target.
+
+Tue Oct 28 14:36:41 PST 2003 zip029 Chas
+-- Implemented KEY? and modified KEY to work with KEY?.  The target
+sends a command byte of either 1 for KEY or 2 for KEY? and then waits
+for a number to be send by the host.
+***************************************
+In addition, I modified 'copy_scripts' in the file amrforth.tcl so that
+these three files are also copied to a new project directory:
+   download-cygnal.tcl
+   download-aduc.tcl
+   download-80c552.tcl
+The file download-cygnal.tcl was different in ~/amrforth/v6/, a key
+binding needed to be removed, and this caused a bug.  The file
+download-cygnal.tcl was copied from ~/Projects/amr/changing/ to
+~/amrforth/v6/ as well.
+
+** Mon Oct 27 16:10:04 PST 2003 zip319
+-- Found and fixed two bugs in the single stepper while demonstrating it
+to Bob Nash.  First, the single stepper in Tcl was executing words on
+the target based on a dictionary lookup at runtime, similar to the forth
+word 'evaluate.'  If the user program changes the meaning of any of
+those words, as I did, then the single stepper fails mysteriously.  Now
+the compiler makes a log file that preserves the addresses of kernel
+words for the single stepper to use, call 'kernelwords.log.'  Second,
+when the file 'rom.bin' is read in it needs to be fconfigured for
+-translation binary, to prevent cr ($0d) from being translated to lf
+($0a).
+
+** Fri Oct 24 12:32:21 PDT 2003 zip318
+-- Added a menu entry to run the single step debugger.
+
+** Tue Oct 21 14:35:34 PDT 2003 zip317
+-- Found a bug in Windows only, the selection is only visible when the
+window pane has the focus.  I was using the selection tag to highlight
+the current word in the single stepper.  It worked fine in Linux.  The
+simple fix was just to use another name for the tag, I called it ip for
+Interpreter Pointer.  Now it works in both Windows and Linux.
+
+** Tue Oct 21 10:46:33 PDT 2003 zip316
+-- Fixed copy_script inside new-project so that if the script to be
+copied doesn't exit (config files for example) that's reported and then
+ignored, instead of aborting the copying.  Changed interpret-forth so
+that target forth words take precedence over host words like c, t, d,
+and e.  It is convenient to name test words t for ease of use and now
+this is possible.  If the host word is covered up by the target word,
+you always have the option of using the menu instead.  Changed the amrf
+script to refer to the local directory instead of the central one.  That
+had been overlooked.  The other scripts, c and t, already refer to the
+local directory.  The d, i, and f scripts still refer to the central
+directory because they make sense that way, their code shouldn't change.
+
+** Mon Oct 20 15:41:43 PDT 2003 zip315 
+***** From original todo list...
+* Single Step debugger.  Decide how to go about it:
+   Simulate from the host, like the old system.  Need first to compile
+   pointer to source code for each definition, maybe using vtags.fs like
+   before.
+*****
+-- This has been accomplished, as documented below.  We are simulating
+from the host, though the target return stack is used now for nesting.
+We were already using vtags.fs and creating the file tags.log, which is
+used by the 'e' command to edit the source for a target word.  This was
+reused for the source display in the debugger.
+
+********************************************************************
+**** Mon Oct 20 15:29:02 PDT 2003 ****
+-- At this point some development took place in a separate directory.
+This included a single step debugger and changes to the script files to
+allow all source code to reside in the project directory instead of
+running all projects from the central ~/amrforth/v6/ directory.  The
+HISTORY comments from that directory are included here.
+
+Mon Oct 20 15:12:00 PDT 2003 zip027 Chas
+-- Now the foreground and background colors are temporarily changed back
+to black on LightGray during the new-project and open-project dialogs.
+Green on Black ends up with invisible labels in the dialog.  Got the
+idea from Chris Hafey who is testing the system.  Thanks Chris.
+
+Mon Oct 20 14:40:58 PDT 2003 zip026 Chas
+-- Extended that check to nesting, so the stepper won't try to nest into
+a code word anymore.
+
+Mon Oct 20 14:15:55 PDT 2003 zip025 Chas
+-- Modified step so that it aborts gracefully if the word can't be
+stepped (doesn't start with a subroutine).  Step now checks for presence
+of target device, complains if no answer.
+
+Fri Oct 17 18:14:02 PDT 2003 zip024 Chas
+-- Ok, now LIT and CLIT are handled properly in a skip.  The other three
+should not be skipped and are set to stop stepping if a skip is
+attempted.  They have not been tested however.
+
+Fri Oct 17 17:55:27 PDT 2003 zip023 Chas
+-- Added Skip to the single stepper.  It will skip over a single
+subroutine.  Doesn't handle words that modify IP in their simulations,
+such as LIT, CLIT, (S"), (NEXT), ?BRANCH, etc.
+
+Fri Oct 17 17:44:35 PDT 2003 zip022 Chas
+-- Changed path for run-compiler and run-rommer in amrforth.tcl.  Was
+still compiling from the homepath, not the current directory.  The c
+script was correct though.
+
+Fri Oct 17 16:24:11 PDT 2003 zip021 Chas
+-- Able to nest into and out of the word chosen by exec: now.
+
+Fri Oct 17 15:54:47 PDT 2003 zip020 Chas
+-- The word about to be executed is now highlighted in the source
+display.
+
+Fri Oct 17 14:17:39 PDT 2003 zip019 Chas
+-- The source word is saved and restored now while nesting and
+unnesting.
+
+Fri Oct 17 12:06:17 PDT 2003 zip018 Chas
+-- Exec: is now handled properly.
+
+Fri Oct 17 10:33:39 PDT 2003 zip017 Chas
+-- Nest and unnest seem to be working now, both for tail recursive jumps
+and normal exits with RET.
+
+Thu Oct 16 17:12:02 PDT 2003 zip016a Chas
+-- Not working quite right.  Debugging nest and unnest on a real
+application.  In progress.
+
+Thu Oct 16 12:17:57 PDT 2003 zip016 Chas
+-- Now able to nest into a forth word in the single step debugger.
+
+Wed Oct 15 15:33:18 PDT 2003 zip015 Chas
+-- Changed compiler to produce the exits.log file.  This is to
+distinguish between a jump that means branch and a jump that means exit.
+Modified the exit sequence so that the .s comes before the prompt, as it
+should.
+
+Wed Oct 15 12:33:00 PDT 2003 zip014 Chas
+-- Extended long-addr and absolute to work on jump instructions too.
+
+Tue Oct 14 17:35:49 PDT 2003 zip013 Chas
+-- Added simulator for (next).  No need to simulate push, pop, >r, r>,
+i, r@, and such in this version of amrFORTH.
+
+Tue Oct 14 17:09:06 PDT 2003 zip012 Chas
+-- Added simulator for ?branch.  Added hex display of current address of
+program counter (ip) at beginning of each line.
+
+Tue Oct 14 15:18:43 PDT 2003 zip011 Chas
+-- Simplified and factored the stepper code.
+
+Tue Oct 14 14:28:49 PDT 2003 zip010 Chas
+-- Changed binding so that <return> and <space> perform one-step,
+<escape> performs stop-step.  The howto message is red (foreground).
+Maybe later that will be changeable.
+
+Mon Oct 13 15:54:10 PDT 2003 zip009 Chas
+-- Single stepper.  Able to run three quit steps, executing word and
+showing stack.  Can't handle exits nor branching yet, but it's a start.
+
+Fri Oct 10 16:41:51 PDT 2003 zip008 Chas
+-- Worked on single stepper.  The compiler makes a file, now called
+objectcode.log, which contains object addresses along with the forth
+word compiled at that address.  Tcl reads this into an array of lists.
+The key for the array is the object address.  The value for the array is
+a list of forth words compiled at that address.  A list is needed
+because words like ( and ; sometimes don't advance the dictionary
+pointer.  The word step now works like decompile.  It's a start.
+
+Fri Oct 10 12:06:26 PDT 2003 zip007 Chas
+-- Started implementing the single stepper.  First the compiler needs to
+make a file, stepper.log, which helps Tcl figure out what to do.
+
+Thu Oct  9 16:18:28 PDT 2003 zip006 Chas
+-- Changed the procedure new-project such that all important files are
+copied from the current project directory to the new one, including the
+config files.  This means your preferred look and feel will follow to
+the new project.  If you want the default config you start from
+~/amrforth/v6/.
+
+Thu Oct  9 15:16:59 PDT 2003 zip005 Chas
+-- I think the sourcing of tcl files is correct now.  If a local version
+exists it is sourced, otherwise the default version is sourced from
+~/amrforth/v6/.
+
+Thu Oct  9 14:53:22 PDT 2003 zip004 Chas
+-- Changed globalconf.tcl in ~/amrforth/v6/ to lookconf.tcl in ./.  Look
+and feel are now local, not global.
+
+Thu Oct  9 14:43:31 PDT 2003 zip003 Chas
+-- Changing config process such that all files can reside in the project
+directory.  If missing from project, then the defaults will be used in
+the HOMEPATH.
+
+Wed Oct  8 14:24:24 PDT 2003 zip002 Chas
+-- Brought in optkern8051.fs from home and tried to compile it.  After
+editing some typos and changing some old code in other files, it
+compiles but doesn't run.  Don't know why yet.
+
+Tue Oct  7 17:02:50 PDT 2003 zip001 Chas
+-- In this directory I am experimenting with some changes to amrFORTH,
+starting by moving 'compile.fs' and all target compiler files to this
+directory.  In the near future we want to have all compiler files reside
+in the project directories, so that a project's source code is all
+accounted for in one place.
+
+**** Mon Oct 20 15:29:02 PDT 2003 ****
+-- At this point some development took place in a separate directory.
+This included a single step debugger and changes to the script files to
+allow all source code to reside in the project directory instead of
+running all projects from the central ~/amrforth/v6/ directory.  The
+HISTORY comments from that directory are included here.
+********************************************************************
+
+** Wed Oct  8 16:46:07 PDT 2003 zip314
+-- Removed the 'html' directory.  Moved the help html files to
+~/amrforth/www.amresearch.com, via prepinstall.
+
+** Wed Oct  8 14:56:37 PDT 2003 zip313
+-- Modified 'prepinstall' to copy the appnote pdf's and zip's to the
+local directory and make index.html, the help file, point to them.
+
+** Thu Oct  2 16:26:49 PDT 2003 zip312
+-- Generalized the library files ms.fs and freetime.fs to include all
+the Cygnal gadgets; g017, g061, g300, g310.  Found in ~/amrforth/v6/lib.
+
+** Thu Oct  2 14:16:16 PDT 2003 zip311
+-- Discovered a bug for the g300 and g310 where the interrupt vectors
+are patched beyond rom-start, overwriting important code.  Added the
+word 'all-vectors' which relies on 'rom-start' to deside when to stop
+patching interrupt vectors.  This should automatically work for all
+future chips too.  Also commented out a redefinition of key and key?
+after quit.  This was an experiment that never worked with the amrFORTH
+GUI, just in Linux, and it wasn't even satisfactory there.  It was an
+attempt to be able to execute key and/or key? interactively, which does
+not work at this time.
+
+** Wed Oct  1 16:27:26 PDT 2003 zip310
+-- Added a few files to ~/amrforth/v6/lib/ after writing a new appnote
+about millisecond timers.  The files are ms.fs and freetime.fs.
+
+** Mon Sep 29 16:13:38 PDT 2003 zip309
+-- Added sfr file for the 80c537.  Also changed the save word in
+'compile.fs' and some setup code in kernel8051.fs to allow the 537 as
+well as the 31 and 32 as residing in RAM at address $8000.  The
+downloader now works for the 537 as well as the 552.  We have no 31 or
+32 to test at the moment, but they are likely to work too.  The
+downloader also executes 'abort' on the target automatically now at the
+end of the download.  That's to get the new interpreter running out of
+RAM instead of using the old target kernel in ROM.
+
+** Tue Sep  2 15:49:41 PDT 2003 zip308
+-- Added code in Tcl to allow "char a" on the forth command line to put
+a 65 on the gadget stack.  Unfortunately the Tcl function used can't
+tell an uppercase from a lowercase character.  They are all returned as
+lowercase.
+
+** Thu Aug 28 11:27:47 PDT 2003 zip307
+-- Added a mechanism in the save script to use a datelog script to keep
+the date of the lates save in a file, called date.tcl.  Date.tcl is
+sourced by amrforth.tcl to make a datestamped version string for the
+GUI.
+
+** Thu Aug 28 10:28:22 PDT 2003 zip306
+-- Removed some double carriage returns in kerne8051.fs to make the
+compiler report look better.  Removed the display of current directory
+when GUI starts up, it's in the title bar already.
+
+** Thu Aug 28 10:04:58 PDT 2003 zip305
+-- Added "-code" to allow coded subroutines without symbol table
+entries, such as "?branch", "clit", and "lit".  Now they can't be
+executed from the command line accidentally, and don't confuse people in
+the "words" report.  Also added "-e quit" to the end of the line in "c"
+so that the Gforth signon isn't printed to the screen.  Less cluttered
+and confusing.  This is for Linux command line users only.
+
+** Wed Aug 27 14:50:47 PDT 2003 zip304
+-- To help with documentation, added a feature that saves a file
+containing all the compiler (immed) words called immed.log.  The GUI
+reads this file and shows the compiler words along with the host and
+target words when you type words at the GUI command line.  Noticed while
+testing that the symbol-table was not reread after each compile.  Fixed
+that too.
+
+** Fri Aug 22 12:21:40 PDT 2003 zip303
+-- Noticed a bug in "e" command in GUI, while describing the command to
+Henrik Thurfjell.  It was looking for the "tags" file when we have
+renamed it "tags.log".  Fixed.  This is the GUI command that loads
+source code for the following word into the GUI's editor.  For example, 
+  "e dup"  will open "kernel8051.fs" and seek to the starting line of
+target definition for "dup" in the editor window.
+
+** Thu Aug 21 15:58:23 PDT 2003 zip302
+-- Changed the prompt in the Linux command line downloader to match the
+one in the GUI.
+
+** Sat Aug 16 14:07:47 PDT 2003 zip301
+-- Incorporated Wolfgang Allinger's bug fixes directly in files
+compile.fs, amrforth.tcl, asm8051.fs, and metacomp.fs.  Didn't
+incorporate his debugA.fs changes because they take more memory, but his
+file is included in the ~/amrforth/v6/ directory for those who want to
+use it instead of ours.  We did modify .s to allow for .sh and .su, hex
+and unsigned respectively.  Also changed the GUI code to use the default
+font size immediately.  Before you would see the font momentarily in 10
+point, then it would redraw to your default size.  Wolfgang's fixes are
+marked and dated in the source.  Thank you.  We certainly welcome this
+kind of help, especially when it is well documented as this is.
+
+** Fri Aug 15 16:32:40 PDT 2003 zip300
+-- Removed a line in "prepinstall" that copied install-tcl.bat to the
+release directory.  The batch file didn't work and no longer exists.
+
+** Fri Aug 15 15:30:01 PDT 2003 zip299
+-- Wolfgang Allinger also pointed out that ACALL and AJMP don't range
+check, so they will assemble incorrect addresses when out of range
+instead of aborting.  This has been fixed.
+
+** Fri Aug 15 12:32:57 PDT 2003 zip298
+-- Wolfgang Allinger has pointed out that the value for rom-start is
+wrong in the f310 and the f300.  Both chips have fewer interrupt vectors
+than the f000 or the f061.  The CONFIG program (in Tcl) has been fixed.
+The bootloader for the f310 also needed fixing, more interrupt vectors
+added, and that has also been done.
+
+** Thu Aug  7 15:49:08 PDT 2003 zip297
+-- Added some lines to prepinstall to get the latest /v6/index.html and
+associated graphics files from the web, so we always have the latest
+documentation locally.
+
+** Tue Aug  5 12:25:05 PDT 2003 zip296
+-- Changed the name of this file from HISTORY to HISTORY.TXT so that
+windows users could more easily open it.  Also updated the batch file
+"prepinstall" so that it puts "unzip.exe" in the releases directory.
+
+** Thu Jul 31 16:18:23 PDT 2003 zip295
+-- Attempted another fix of the Windows serial port lockup problem.
+Needs to be tested some more.
+
+** Mon Jul 28 12:29:55 PDT 2003 zip294
+-- Revised the README.linux and README.windows files, instructions on
+installing.
+
+** Fri Jul 25 14:53:50 PDT 2003 zip293
+-- Created a path variable in amrforth.tcl called gforthpath, so that
+the user doesn't need to add a path statement to autoexec.bat anymore.
+Cleaned up the individual processor directories.
+
+** Thu Jul 17 10:33:07 PDT 2003 zip292
+-- Discovered that even in Windows Tcl/Tk shows a carriage return as an
+unknown character, a box.  End of line for Tcl/Tk is the Unix style
+linefeed.  Fixed the word listen in amrforth.tcl to reflect this.
+
+** Wed Jul 16 17:07:20 PDT 2003 zip291
+-- Purged unneeded files from the main directory.
+
+** Wed Jul 16 15:22:25 PDT 2003 zip290
+-- Changed the first appnote so that the forth version of keylcd.fs
+doesn't need any basic.fs to work.  Redefined us and ms to count cycles.
+Updated the appnote text to reflect this.  Also moved mode variable from
+local options to global options.
+
+** Wed Jul 16 11:36:10 PDT 2003 zip289
+-- Fixed a bug where the error.log is displayed when reading a symbol
+table.
+
+** Tue Jul 15 17:06:56 PDT 2003 zip288
+-- Changed the r command to t for turnkey, to be consistent with the
+menu.
+
+** Tue Jul 15 16:53:35 PDT 2003 zip287
+-- The search routine in the editor no longer selects the search string.
+I kept deleting the string by pressing enter.
+
+** Tue Jul 15 16:26:06 PDT 2003 zip286
+-- Correctly handling the close window message for the configure dialog.
+The configuration is either saved or restored, and a command line
+message says so.
+
+** Tue Jul 15 14:52:54 PDT 2003 zip285
+-- Modified config dialog.  Now it is approximately centered on the
+screen.  It displays the current frequency and baudrate.  The frequency
+display in now in MHz instead of Hz both in the dialog and in the info
+field at the bottom of the window.
+
+** Mon Jul 14 16:54:19 PDT 2003 zip284
+-- Added choice of interrupts or no in config.  Removed corresponding
+old menu choices.  Changed SAVE under options to only save global
+options.
+
+** Mon Jul 14 15:31:04 PDT 2003 zip283
+-- Finished choosing comport in new config dialog.
+
+** Mon Jul 14 14:00:23 PDT 2003 zip282
+-- Finished choosing processor defaults in new config dialog.
+
+** Mon Jul 14 12:15:09 PDT 2003 zip281
+-- Started creating a config dialog to replace part of the options menu.
+It wasn't clear enough how to configure that way.
+
+** Fri Jul 11 14:51:23 PDT 2003 zip280
+-- Added a catch in the serial code in an effort to stop some errors.
+It's an experiment.
+
+** Fri Jul 11 11:48:30 PDT 2003 zip279
+-- The change in FOR,NEXT broke the JTAG loader program in
+~/amrforth/v6/300/jtag.  This has been fixed.  Actually there was a bug
+in the previous fix.
+
+** Mon Jul  7 12:39:07 PDT 2003 zip278
+-- Added decode-all to the file decomp8051.fs to help make an assembler
+listing.  Also added A and A.BAT which call decode-all and print to
+standard out.
+
+** Wed Jul  2 16:16:29 PDT 2003 zip277
+-- Restored type in the file debug.fs.  Added debugA.fs to the lib
+directory.
+
+** Tue Jul  1 17:15:58 PDT 2003 zip276
+-- Modified dump in debug.fs so that the addresses are correct and
+spacing makes more sense.  Bugs pointed out by Wolfgang Allinger.
+
+** Mon Jun 30 13:34:18 PDT 2003 zip275
+-- Added more color choices.  Under Options you can now separately
+choose color of: background, host foreground, target foreground, insert
+cursor, and highlight color (to show focus).
+
+** Fri Jun 27 12:26:20 PDT 2003 zip274
+-- Changed the prompt when downloading so that the user will press and
+hold the reset button on the target, then press the space key on the
+host keyboard before the download actually starts.  Downloads are more
+reliable when the timing is right.
+
+** Mon Jun 23 13:45:12 PDT 2003 zip273
+-- Also added Wolfgang Allinger's routine to convert from binary to
+ascii hex to .hex in debug.fs.  Added ansi.fs color change to Red when
+target is speaking, for clarity.  This is only in the Linux command line
+version.
+
+** Mon Jun 23 12:04:01 PDT 2003 zip272
+-- Used the trick shown me by Wolfgang Allinger to simplify 0= and 0<>
+type code sequences in the kernel.  Words changed are: not, 0=, <, u<,
+0<, key?, depth.  Thank you Wolfgang.
+
+** Fri Jun 20 13:13:55 PDT 2003 zip271
+-- Changed path to browser in amrforth.tcl (for Windows) to
+c:\PROGRA~1\INTERN~1\IEXPLORE.EXE as suggested by Wolfgang Allinger.
+This (we hope) will work with both the American and German versions of
+win98.  Also the path to online help was changed from ...\help.html to
+...\index.html.
+
+** Mon Jun 16 13:24:15 PDT 2003 zip270
+-- There was a bug in the Windows version.  We were making Unix system
+calls to get the path and the date for log files.  This worked on my
+Windows machine because I had Unix tools loaded.  This has been fixed.
+Log files have the current date and time, but not the current path now.
+In Win98, which is all we have to test, the date is shown as 1970 even
+though the Windows system date is 2003.  This seems to be a bug in
+Gforth for Win98.  We leave it this way in hopes that the next version
+of Gforth will behave better.
+
+** Thu Jun 12 11:32:43 PDT 2003 zip269
+-- Yes, we were saving to flash, but not building the vector table at
+address $200.  After adding C8051F061 to the list of cygnal-chip type
+kernels, the bootloader started working.
+
+** Wed Jun 11 16:00:43 PDT 2003 zip268
+-- Fixed baudrate even better, downloading now but not running, maybe
+not saving to flash?
+
+** Tue Jun 10 17:02:20 PDT 2003 zip267
+-- Debugged the f061 bootloader, got baudrate right finally but still no
+bootloader.
+
+** Mon Jun  9 17:15:49 PDT 2003 zip266
+-- After changing FOR,NEXT it was necessary to change any pre-existing
+code that used for,next.  This included the JTAG downloader for the 300.
+It has been changed and now works properly again.  Must search the other
+directories and fix them too.
+
+** Tue Jun  3 14:33:08 PDT 2003 zip265
+-- Noted in the kernel that exec: is limited to a jump table of 256
+bytes, which means no more than 85 words in the list.  In most cases
+this will suffice.  If a really large table is needed, say 256 words for
+example, another method must be used.
+
+** Wed May 28 15:29:14 PDT 2003 zip264
+-- Fixed a bug in exec:.  The compiler was using LCALL when it should
+have been using LJMP for the jump table.  That's why it's called a jump
+table and not a call table.
+
+** Tue May 27 11:06:44 PDT 2003 zip263
+-- ***** Important! ***** Changed the for,next loop so that it counts
+down to 1 instead of 0.  The new version is even simpler than before,
+faster, and if you say 10 for next it loops 10 times instead of 11.
+Still, must be careful using i to get the index.  Before this the
+for,next counted down to 0 so 10 for next would loop 11 times.  Some
+forths out there behave this way.  Chuck Moore's colorForth behaves the
+new way, and now amrForth does too.  Also streamlined ?branch.  Branch
+is always a long jump.  ?branch takes advantage of that now.
+
+** Fri May 23 11:42:33 PDT 2003 zip262
+-- Redid the definition of exec:, including a change to ], the main
+target compiler.  The change is the ability to turn of the call
+optimizer, which uses ACALL whenever possible to save memory.  Exec:
+needs all the calls to be the same length.  This changes allows multiple
+lines and comments in an exec: word.
+
+** Thu May 22 17:26:34 PDT 2003 zip261
+-- Added the file sfr-f061.fs in support of another Cygnal chip.  Still
+need to integrate into the Options menu and config files.
+
+** Thu May 22 15:07:12 PDT 2003 zip260
+-- Fixed syntax coloring for VIM in kernel8051.fs after the definition
+of exec:.
+
+** Wed May 21 15:14:30 PDT 2003 zip259
+-- Added exec: to the kernel.  We had this in the older versions.  It
+took me awhile to figure out how to do it with call threading.  It takes
+no space until used, then it costs 10 bytes of inline code plus 3 bytes
+for each word in the list.
+
+** Wed May  7 09:51:06 PDT 2003 zip258
+-- Also fixed KEY?.  Both KEY and KEY? have tacked on special versions
+for interactive debugging.  They go away when the program is turnkeyed.
+They only cost a few bytes.  They are inserted immediately after QUIT in
+the kernel.  Still haven't integrated this into the Tcl GUI.  It only
+works for the Linux command line interpreter right now.
+
+** Tue May  6 17:34:44 PDT 2003 zip257
+-- Had to add special handling in the kernel and in the Linux-only
+command line interpreter for KEY.  It locked up the interpreter before.
+Still need to think about KEY?.  It requires conditional compiling, and
+now an interactive compile differs from a turnkey compile in the
+definition of KEY.
+
+** Mon May  5 14:47:51 PDT 2003 zip256
+-- Modified the JTAG downloader code for the f300 jtag downloader.
+Inserted a HALT instruction before the erase and the download, to get
+the remote chip's attention first.  The download is much more reliable
+now.
+
+******** Changes to notice in the April 28, 2003 release ********
+There are 5 new features and 3 bug fixes since March.
+
+Features:
+    1. In order to easily create log files we've added the words
+'makelog' and 'createlog' to the kernel.  Actually they run on the host
+system, not the target.  The kernel now automatically creates a file
+called iram.log which lists the names and addresses of any Internal RAM
+variables created by an application.  Using createlog and makelog you
+can easily log the allocation of memory in other spaces.  A logfile
+viewer has also been added.  The logfile is opened in a separate,
+read-only window with scroll bars.
+    2. Added DOES> and ;CODE to the kernel.  We originally
+underestimated the importance of these words.  We found that we needed
+them in the first real application using v6, so they are back in the
+kernel.  This version commits no target resources until they are
+actually used, so no wasted dead code.
+    3. Added automatic session logging.  When you leave the amrforth
+GUI now a file is created called lastsession.log which contains a
+transcript of your commands and the target's responses for that session
+of amrforth.
+    4. Changed the way the interpreter and editor windows are sized.
+Now there is a grab handle in between the frames that will change their
+relative size, and an /option/save/ will remember the current window
+size and relative size of the main frames.
+    5. When you save options the current mode is also saved.  This way
+you can bypass Host mode and automatically go straight to Forth mode.
+Also the Linux only command line scripts: c, r, d, i, and amrf are all
+copied to your new project directory by the new-project function in the
+GUI.  Linux user's can avoid the GUI entirely if they would like, and
+run from the bash command line.
+
+Bug Fixes:
+    1. The words that access the return stack, >R, PUSH, R>, POP, R@, I,
+need to be called in order to work properly.  The tail recursion
+optimizer was sometimes changing calls to these words into jumps, which
+broke them.  Now these words are hidden from the optimizer.
+    2. Found in the GUI that the configuration of the SFR-file was not
+being read in properly at startup, which broke the configuration if a
+save was then performed, resulting in compiler errors.  This has been
+fixed by declaring sfrfile as a global variable in the Tcl word
+'reconfigure' in ~/amrforth/v6/amrforth.tcl.
+    3. The 0push macro has been removed from the kernel.  Instead use
+'A clr  Apush' to make it clear that the accumulator is being used.  The
+JTAG/C2 downloader was broken because the 0push macro had been changed
+from directly writing the stack to writing through the accumulator.  Now
+it is obvious that the accumulator is changing.  In order to put the
+data stack into external RAM we have to give up writing directly to the
+stack, and we will eventually want to allow the data stack to be in
+external RAM for multitasking.
+
+******** End changes, April 28, 2003 release ********
+
+** Wed Apr 30 15:06:02 PDT 2003 zip255
+-- Now when you save options the current mode is also saved.  This way
+you can bypass Host mode and automatically go straight to Forth mode.
+
+** Tue Apr 29 15:50:03 PDT 2003 zip254
+-- Added read only windows showing log files.  Changed the way the
+interpreter and editor windows are sized.  Now they have a grabber in
+between them that will let you set the relative sizes of the windows.
+
+** Mon Apr 28 12:06:53 PDT 2003 zip253
+-- Removed the 0push macro.  It originally moved 0 directly on the top
+of the data stack, but was changed to go through the accumulator in
+order to allow the possibility of an external data stack.  This broke
+some code in the JTAG/C2 downloader, because it wasn't obvious that A
+was being changed by 0push.  Too much information was being hidden.  The
+macro was removed to force the programmer to be more aware in the future
+that all stack operations move through the accumulator.
+
+** Fri Apr 25 18:09:34 PDT 2003 zip252
+-- Fixed a bug where the sfrfile variable was not being read in at
+startup, a global thing in Tcl, and then was sometimes being saved
+incorrectly, causing the compiler to not work.
+
+** Fri Apr 25 12:05:18 PDT 2003 zip252
+-- Added automatic session logging.  Also added a log viewer under File
+menu, filters for files ending in .log and opens chosen file in the
+editor window.  Added datestamp in first line, project directory in
+second line of log.  Named it lastsession.log to emphasize the fact that
+logs are not saved until you say BYE to amrforth.  Added datestamp and
+project directory to the variable log files too.
+
+** Thu Apr 24 11:14:03 PDT 2003 zip251
+- Decided we couldn't live without DOES> and ;CODE.  Added them to the
+kernel.  The good news is they no longer take any space until they are
+used.  No wasted dead code if you don't use defining words.  See
+defining.fs for the code.  Also added the scripts 't' and 'f'.  Similar
+to the script 'i', they only work for Linux, on the command line.
+'t' allows you to pass a command line in to the target interpreter and
+capture its output from stdout into a file on the host machine.  'f'
+allows you pass in a file full of commands to be run on the target.  The
+command lines must begin with 'please' in order for the target to get
+the command, otherwise the host will get it and execute it.  A debugging
+tool I've wanted for a long time.  Sorry Windows users.  Gforth can't
+talk to the serial port in Windows.
+
+** Wed Apr 23 11:31:00 PDT 2003 zip250
+- Discovered a bug. PUSH, POP, >R, R>, R@, and I all need to be called
+in order to work properly.  They need to be hidden from the tail
+recursion optimizer, which changes a call to a jump.  This has been done
+by making immediate words which compile calls to the target words, then
+execute HIDE to avoid the optimizer.
+
+** Tue Apr 22 15:13:29 PDT 2003 zip249
+- Added the defining word MAKELOG and used it to create a log file for
+cpu variables.  Each line contains the name of a variable and the
+address where data are stored.  MAKELOG can be used in an application to
+log the allocation of other memory spaces, such as dataFLASH and XRAM.
+
+** 16Apr03 zip248
+- Added some documentation to the appnotes so far, telling where to find
+the executable files being discussed.
+
+** 11Apr03 zip247
+- Added aliases in-host for in-forth, and in-compiler for in-meta.  I
+think they will make more sense and require less explaining.  Maybe
+will eliminate the originals later.
+
+** 09Apr03 zip246
+- Cleaned up the serial interrupt.  Slightly faster, simpler to read.
+
+** 08Apr03 zip245
+- In order to use the serial interrupt on a Cygnal chip, had to fiddle
+with the INT! words in kerne8051.fs.
+
+** 05Apr03 zip244
+- Added more comments to appnote001.txt.
+
+** 25Mar03 zip243
+- Added the directory /amrforth/v6/lib/ which now contains adc017.fs and
+adc017int.fs.  Renamed /amrforth/v6/faqs/ to /amrforth/v6/appnotes/.
+
+** 21Mar03 zip242
+- Added some host code to interpret.fs so that the execution time of
+each command line is timed and reported.  This is only in the GNU/Linux
+command line version so far, not the GUI version.
+
+** 20Mar03 zip241
+- Experimented with oversampling the 017 adc.
+
+** 19Mar03 zip240
+- Added A/D reading examples to 300/example and 017/example directories.
+Will end up in the lib directory eventually.
+
+** 18Mar03 zip239
+- Added some words to the BASIC system, to make precise timing easier.
+The words are TIMER, TIMING, and ADD-TIMER.
+
+** 07Mar03 zip238
+- Tested and updated the original gforth downloader and interpreter that
+were used as a model for the Tcl version.  They still work, in linux
+only of course, and are a viable alternative for those who prefer the
+command line over the mouse.
+
+** 06Mar03 zip237
+- Determined after extensive testing that the path statement must be
+different in windows, so added a conditional fpath= statement to
+compile.fs.
+
+** 06Mar03 zip236
+- Changed the fpath statement in 'compile.fs'.  Now the search path for
+gforth is the current working directory, then the amrforth/v6 home
+directory, and nothing else.
+
+** 06Mar03 zip235
+- Added gloss, a script to produce a text glossary from forth source
+code.  Earlier the glossary script was created to produce an html
+glossary, but this is a pain to read because you need to switch to an
+html browser.  Now we have both.
+
+** 05Mar03 zip234
+- After testing 233 in Windows, added a tkwait so that the command
+prompt won't appear before the error report.
+
+** 05Mar03 zip233
+- Solved a problem with Windows and the pipeline to gforth when stderr
+is involved.  Now both Windows and Linux use a file called errors.txt to
+temporarily save the stderr stream when gforth is called.  Then if there
+is an error stream it is shown in the interpreter window by the Stop
+function.  Before the gforth error stream was garbled.  Also both linux
+and windows now use the same code.
+
+** 05Mar03 zip232
+- Added a line to 'prepinstall' that copies a default_globalconfig.tcl
+file for windows, instead of my personal linux version.
+
+** 04Mar03 zip231
+- Separated an LCD example (in forth) from the keylcd.fs example for the
+017.  Made an html glossary for that too.
+
+** 04Mar03 zip230
+- Made progress on a sed script for producing an html glossary for a
+forth source code file semi-automatically.
+
+** 25Feb03 zip229
+- Finished the first example paper, LCD and buttons in BASIC and in
+Forth.
+
+** 24Feb03 zip228
+- Started a faqs directory and the first faq or example paper.
+
+** 21Feb03 zip227
+- Added modular.bas to the 017/basic directory, it's a version of the
+basic example that uses more subroutines instead of goto's, in order to
+be able to test individual subroutines interactively.
+
+** 20Feb03 zip226
+- Debugged the BASIC example for the 017 and a forth version of same,
+included in the amrforth directory tree.
+
+** 17Feb03 zip225
+- Now BASIC labels (subroutines) are tagged so that their source code
+can be located with 'e' in the interpreter.
+
+** 17Feb03 zip224
+- Modified infix in BASIC so that REM, rem, and ' can be used to
+terminate an infix expression with a comment on the same line.
+
+** 14Feb03 zip223
+- Released v6 for internet download.
+- Bug in latest release when used with wish 8.4 instead of 8.3.  The
+function tkTextSetCursor seems to have disappeared.  It was used by the
+editor.  It has been replaced by the apparently more standard phrase:
+$edit_log mark set insert "$lineno.0" in order to place the cursor on
+the first line of a word's source definition.
+
+** 13Feb03 zip222
+- Finished up locate.  Fixed up-arrow history so it doesn't add an
+unneeded space each time it is run.
+
+** 12Feb03 zip221
+- Started adding locate, to look up source code for a word and open the
+source file in the editor.  Got the file open but not going to the line
+yet.
+
+** 07Feb03 zip220
+- Added a SWAP button and MORE or LESS buttons to the info lines to
+change size of editor and interpreter windows.  SWAP will swap sizes
+between the two and will probably be the most useful.
+
+** 07Feb03 zip219
+- That bug in zip218 seems to have been the bug that kept zip214 from
+working.  I have restored zip214, including editor, and fixed that bug.
+
+** 07Feb03 zip218
+- Found a bug in JTAG-download where the serial buffer needs to be
+cleared before sending another command.
+
+** 07Feb03 zip217
+- Restored show-prompt after each of the C2 and JTAG commands from the
+menu.  This was done before in zip192 I think.
+
+** 07Feb03 zip216
+- Restored the bug fix to save-options, actually choose-com2, from
+zip211.
+
+** 07Feb03 zip215
+- Went back to version zip190 from Jan. 15th, before adding the editor.
+The JTAG was not working and the new program was too complicated for me
+to debug.  The system worked an Jan. 15th, so we'll build from there.
+
+** 06Feb03 zip214
+- Added jtag-erase-menu, the -menu had been left off.
+
+** 05Feb03 zip213
+- Added code in all the jtag and c2 words to check for response from
+jtag device with timeout before committing to a download or other
+command.
+
+** 05Feb03 zip212
+- Fixed bug in C2 downloader code.  It worked when bootloader was there
+to initialize the serial ports, but not standalone.  Had to add startup
+code copied from the bootloader to the jtag loader.  We want the jtag to
+be standalone so it won't be used for an application and lost as a
+jtag/c2 downloader.  Any program that is meant to be standalone, not
+bootloaded, needs to have startup code that bootloaded apps don't
+necessarily need.
+
+** 04Feb03 zip211
+- Fixed bug in save-options where com2 was changed to com1.
+
+** 03Feb03 zip210
+- Deleted some unecessary files in ~/amrforth/v6/ and copied the .html
+versions from the website using wget.
+
+** 03Feb03 zip209
+- Added some lines to the script preinstall which create history.html in
+the ~/release/ directory and move the linux tarball, the windows zip,
+and the three readme files to the release directory as well.  Those
+files can be scp'd from there into the /home/Public/current/ directory
+on the fileserver.  Also added a script called release does the scp to
+the fileserver.
+
+** 31Jan03 zip208
+- Changed script for unzipping amrforth in windows so it will work right
+from the CD.  Also updated README files.
+
+** 30Jan03 zip207
+- Changed prepinstall script again so that it creates a zip archive of
+the windows version.  Also the script and the subdirectories are removed
+so that all that remains are the readme and the three archives for
+gforth, tcl/tk, and amrforth.  Ditto for the linux tree.
+
+** 30Jan03 zip206
+- Changed prepinstall script so that it creates a tarball for the linux
+version of amrforth.  The tarball can be untarred such that directories
+and permissions are restored properly.  Copying directly from the CD
+left all the files write-protected.
+
+** 29Jan03 zip205
+- Changed amrf.bat script to run wish instead of wish83.  We are using
+wish84 now in windows.
+
+** 29Jan03 zip204
+- Installation CD now includes ActiveTcl8.4.1.0, the latest at this
+point.  The readme files have been changed to reflect this.
+
+** 28Jan03 zip203
+- In vtags.fs, commented out the two require lines.  They are not needed
+and caused trouble compiling in Windows, where apparently the path is
+not set such that the required files can be found.  The tags file is
+currently not being used, but will be in the near future to allow
+editing source for a word and _maybe_ hypertext lookup of source code
+within the editor, as in vi for linux.
+
+** 28Jan03 zip202
+- Added new project and open project under file menu.
+
+** 28Jan03 zip201
+- Added in the search functions on the search menu.  Added UP DOWN
+buttons on bottom info line to change relative size of windows.
+
+** 28Jan03 zip200
+- When you exit now the save-file message pops up if the file needs to
+be saved.  Also the editor window has an info line that tells what file
+is being edited.  Added selectall function and time/date stamp to edit
+menu.
+
+** 27Jan03 zip199
+- Cut, copy, and paste work now.
+
+** 27Jan03 zip198
+- Basic editing now works, opening and saving files, marking and
+deleting text.
+
+** 27Jan03 zip197
+- Now we F3 and F4 change the relative sizes of the two windows.
+
+** 24Jan03 zip196
+- The interpreter portion is functional again, but not the editor.
+
+** 24Jan03 zip195
+- Continuing integration, made enough changes to warrant another save,
+though the system is not yet functional.
+
+** 24Jan03 zip194
+- Continuing integration, made enough changes to warrant another save,
+though the system is not yet functional.
+
+** 23Jan03 zip193
+* Integrate a subset of tknotepad into amrforth.
+- Began the integration, so far the menus are integrated in look only,
+no commands added yet.  Also no editor pane yet.  Still wanted to save
+at this point because it was a lot of work getting the menus to look
+right.
+
+** 23Jan03 zip192
+- Had added 'show-prompt' before each error dialog in amrforth.tcl, now
+added same in amrbasic.tcl.
+
+** 16Jan03 zip191
+- Added a tknotepad directory containing a slightly altered version of
+the freeware editor, tknotepad.  Now the default editor for amrforth vf
+is tknotepad.  It should work the same in Windows as in Linux.
+Eventually I can add in vi style tags for hypertext too.  The compiler
+produces a tags file now, useable by vi as is (from amrforth v5).
+
+** 15Jan03 zip190
+- Allow number entry in hex as $1ab2 for example, from the command line.
+Tcl wants you to enter as 0x1ab2.
+
+** 08Jan03 zip189
+- Found a few more show's without following show-prompt's.
+
+** 08Jan03 zip188
+- Open-project failed if you pressed the cancel button, now it simply
+cancels.
+
+** 08Jan03 zip187
+- Need to be sure the config file is reread whenever the project
+directory changes and that the new configuration shows up on the status
+line.  Need to understand Tcl a bit better to do this.
+-- Now when you change the configuration from the menu, the new
+configuration file is loaded after you save it.
+
+** 08Jan03 zip186
+- Fixed some bugs pointed out by Bob Nash.
+1. The labels for the Options/Browser, Options/Frequency, and
+Options/Baudrate are now correct.
+2. Now when a Tcl dialog runs, a carriage return and prompt are emitted
+as well.  The interpreter gets confused if there is no prompt at the
+beginning of the line.
+3. If you open a project from the menu, the configuration gets reloaded
+now.
+4. Now if you pick edit from the menu, or type edit on the command line
+without a following filename, the file job.fs will be edited.  It makes
+sense to type 'edit filename' where filename is the name of the file you
+want to edit, rather than using the editor's means of opening a file.
+-- Also, as pointed out by Henrik Thurfjel, the compiler didn't work
+correctly to turnkey an 80c552 program.  Now it does.
+
+** 07Jan03 zip185
+- Added 'show-prompt' after c, r, and d commands when executed from the
+menu.
+
+** 07Jan03 zip184
+- Finished the baudrate, frequency, and browser dialogs.  The labels are
+correct now.
+
+** 07Jan03 zip183
+- Working on the baudrate and frequency dialogs.  Almost working right.
+
+** 07Jan03 zip182
+- Changed 'edit' so that if no filename is supplied on the command line
+the file job.fs is automatically opened.
+
+** 13Dec02 zip181
+- Added bootloader code for the Cygnal f310.  It's just different enough
+from the f300 to require a separate configuration.  See
+~/amrforth/v6/310/boot.  The compiler now creates both binary and intel
+hex files, rom.bin and rom.hex, so you can use the Cygnal JTAG tools to
+place a serial bootloader into a Cygnal evaluation board.
+
+** 11Dec02 zip180
+- Simplified color options.  Added return to prompt before each Tk error
+call, to avoid ending up with no prompt on a blank line.  Added c, r,
+and d commands to the Host vocabulary.  Compiling and downloading don't
+really care what mode is current.  Removed mode from info line, it's in
+the prompt now.  Added an escape from the new-project function.  Moved
+font-size to the globalconf.tcl file in homepath, all projects now have
+the same color and size.  If no browser configured, linux uses mozilla
+by default and windows uses IExplorer.
+
+** 09Dec02 zip178
+- Now you can change to Forth or BASIC modes even if no target is
+attached.  Both rom.bin and rom.hex are saved every time you compile.
+Rom.hex is an intel hex file, can be used by the Cygnal IDE.
+
+** 09Dec02 zip177
+- Added SFR's for the f310 chip from Cygnal.  Not yet tested.
+
+** 05Dec02 zip176
+- C2 words didn't work because of mixture of upper/lower case.  Fixed.
+- Tweaked F1 help and edit so that in linux at least they start a new
+process in the background.  Haven't tested this in Windows yet.  Also
+the Host mode command 'help' starts up the local help browser.
+
+** 05Dec02 zip175
+- More changes to the text interpreter.  Can't backspace into the
+prompt.  Can't left-arrow or right arrow.  Up and Down arrows cycle
+through command line history (8 lines deep), but don't change the
+prompt.  The prompt is the name of the current mode or vocabulary, one
+of the following: Host, Forth, BASIC, JTAG, C2.  The comport is listed
+in the info line at bottom of window, not in the prompt.  If you happen
+to move the text curser via the mouse, the next key moves cursor back to
+end.
+
+** 04Dec02 zip173
+- Changed the up-arrow logic after discovering how to cancel the default
+behavior of a key binding with ; break.  Now up-arrow and down-arrow
+work essentially just like the bash shell (or doskey).
+
+* If the target is not connected the interpreter needs to say so.
+This was done recently, but not acknowledged until now.  When you switch
+to forth or BASIC modes the target is queried.  If no answer then an
+error message is generated and you can't get into that mode.
+
+** 03Dec02 zip172
+- Added some logic to allow using up-arrow to move to a previously
+executed line and re-execute it.  Deletes text following the line the
+cursor is on, moves line to be executed to end.
+ 
+- Added jtag and c2 vocabularies in addition to host, forth, basic.
+** 03Dec02 zip171
+
+- Due to Windows idiosyncracies job has been renamed job.fs.  Notepad
+needs to tack a .txt onto the end otherwise.  Also, if no job.fs exists
+one is created automatically, no more error message.
+
+* Restore the prompt that shows whether you are talking to the host or
+the target.
+This was fixed a few saves ago but not noted.  Now the prompt shows the
+comport and either Ok for forth or Ready> for BASIC.  A host prompt is
+in the works too.
+
+** 03Dec02 zip170
+Changed open-project so that the config is only cleared if there is a
+local config file, otherwise the previous config carries over and can be
+saved there without respecifying everything.
+
+** 03Dec02 zip169
+* Maybe want to have the compiler patch a $200 jump into the reset
+vector of all programs.  This way the program will run even without the
+bootloader, i.e. if you download it via JTAG.  This is easy enough to do
+by hand in the meantime.
+ Done in the file end8051.fs.
+
+** 11Nov2002 zip168
+* The Windows version needs to have files in DOS mode.  Decide how to
+handle this.
+Maintaining two directories in amr-install, linux and windows.
+Development takes place in linux of course, files are copied to the
+windows directory and unix2dos is run on each file.
+
+** 04Nov2002 zip167
+Added option to change foreground and background colors.
+
+** 01Nov2002 zip166
+Added the C2 interface, for Cygnal F300 family chips, including
+erase, download and dump.  
+
+** 29Oct2002 zip164
+Added 2 bash scripts, all2dos and all2unix.  Use all2dos after copying
+the system to a windows directory in order to change the eol characters.
+
+** 28Oct2002 zip162
+* When amrForth starts up in a directory where no configuration file
+exists, the status line should clearly show this.
+Added -; to the kernel to avoid wasting the RET byte after begin ...
+again -;.
+
+** 28Oct2002 zip161
+* Change BASIC prompt to READY.
+Not sure how to prevent the newline after READY, but maybe that's
+acceptable.  Now you can tell from the prompt which language is active,
+without having to look at the status line where the language name is
+displayed.
+
+
+*************************************************
+OLD HISTORY
+
+***** Changed format of HISTORY file on 10/28/02 *****
+***** From now on latest goes on top, under the TODO list *****
+
+AmrForth v6, a re-implementation of amrforth for the 8051.  Beginning
+with the 8051 parts from Cygnal.
+
+***	12Jun2002 
+The plan is to make amrForth more modular, simpler, easier to understand
+and maintain.  Ultimately the interpreter module can be written in GUI
+style for Windows, but the same compiler can still be used.  Since
+Gforth is essentially identical for Windows and Linux, the compiler
+source and the kernel can be absolutely portable!  Only the interpreter
+needs to be changed, because of the serial ports.
+
+We have three modules so far, Compiler, Downloader, Interpreter.  The
+downloader is very simple.  It only works on the Cygnal parts at this
+time.  The compiler is still the old amrForth at this point.  It will be
+simplified soon.  The interpreter is pretty simple, but still uses the
+old byte code interpreter.  The new interpreter will just send addresses
+to be executed then display every byte received until a control
+character tells the host interpreter that the target is finished.  Maybe
+we continue using $07 as the signal.
+
+We want to incorporate a single step debugger of some kind soon.  Also
+we want to produce a listing file, eventually in .html with links to
+source definitions.
+
+We also need to get gforth to talk to the serial ports in Windows so
+that the whole system is more portable.
+
+***	13Jun2002 
+Simplified the host side of the interpreter by ignoring byte coded
+messages coming from target.  Instead we emit all bytes from target
+to the display, adding linefeeds after carriage returns, until either a
+$07 for OK or a $08 for stack underflow is received.  We are still
+sending byte codes to the target, 1 for >execute and 2 for >put.  Maybe
+we continue with this since it works and it is a way of synchronizing
+the target and the host.  All target words that send byte codes need to
+be removed or modified.  I have already provided h. to take the place of
+. only it's always in hex.  Avoids division.
+
+Simplified the target interpreter so the vector table in quit is
+noop,cell,>execute,noop and any byte greater than 3 is changed into 0,
+to help prevent accidentally running >execute or cell.
+
+Removed much redundant stuff from kernel8051.fs and extend8051.fs.
+Merged both into kernel8051.fs.  Added . to kernel, the decimal version.
+
+***	14Jun2002 
+Pruned metacomp.fs.  Now only files in the /amrforth/v6/ directory are
+loaded.  Still need to handle paths and project directories.
+
+Added backspace to the interpreter.  Made FOR,NEXT work in 16 bits.  It
+is easier to count through zero, 10 for next executes 11 times.  This is
+how it generally works in other forths I've seen, because it makes sense
+in hardware.  i.e. FOR uses >r and NEXT checks the count before
+decrementing it.  If you want to execute 10 times, use this:
+	: test  [ 10 1 - ] literal for  i .  next ;
+
+Added .s finally.
+
+Now have the command c to compile for testing and r to compile for
+self-executing.  R is for ROM, though even the test version goes into
+ROM on these chips.
+
+Added symbols-entry to tcreate so that every target word has an entry in
+the symbol table.  This causes constants to be executable from the
+command line.  Also it associates an address with every name, and vice
+versa, which will be useful in the single stepper.
+
+Added recover, to take back unneeded exit's compiled by ; after an again
+or a goto.
+
+***	17Jun2002 
+Modified EXIT for efficient tail recursion, like ; in colorForth.  Now
+the final call in a high level word is converted to a jump.  EXIT in the
+middle of a word converts the preceding call to a jump as well, unless
+there is a control structure in the way.  No need for GOTO now so it has
+been removed.  Any call followed by EXIT without crossing a control
+structure edge is changed to a jump, in other words a goto.
+
+Simplified amrforth.cfg to only a few lines.
+
+Moved debugging stuff from kernel into a separate file, debug.fs, which
+includes . u. h. .s space.  Noticed that . was really u., so renamed it
+and made a real signed ..
+
+***	18Jun2002 
+Added some processing to interpret.fs to allow assigning and displaying
+basic variables.  No arithmetic though.  Also all basic labels are added
+to the symbol table and can be called by name.
+
+***	24Jun2002 
+Finally got a downloader working in Tcl.
+
+***	25Jun2002 
+Got Compile, Turnkey, and Interpret working in a preliminary fashion,
+including numbers and words.
+
+***	27Jun2002 
+Disabled the word that builds a symbol table file.  We don't need it now
+because we query gforth for addresses as needed.
+
+***	27Jun2002 
+Apparently able to compile and download, but not yet to interpret.  And
+now the interpreter is working too.  It was a matter of proper quoting
+in tcl.
+
+***	28Jun2002 
+Now tcl is interpreting without running Gforth, based on the symbol
+table.  It is much faster and more responsive this way.  Added escape
+key and button to recover when no target is attached.
+Now the text widget is sufficient, the entry box is gone.
+
+***	03Jul2002 
+Added a host vocabulary (in tcl) to handle words like BYE, WORDS, etc.
+Might use same mechanism for BASIC.
+
+***	08Jul2002 
+Added to the Options menu, ability to choose COM1 or COM2, processor
+name, and save options.
+Added to the File menu, "New project" and "Go to project".
+
+***	09Jul2002 
+Got Options menu going with cascading menus for comm, font, processor.
+Options can be saved into config files for each project.
+
+***	11Jul2002 
+Delete rom.bin and symbols.txt before compiling.
+
+***	02Aug2002 
+Removed the serial port initialization from COLD for each of the chips
+with serial bootloaders.  If an application uses the serial port it
+needs to do its own initialization.
+
+***	05Aug2002 
+Changed interpreter to use the line the text cursor is on instead of
+always using the last line.  This allows me to move the cursor up to a
+line of text and reexecute it.  'Ok' is defined as a noop so that it
+will be ignored, and 'listen' does a newline to keep target output off
+the line to be executed.
+
+*** 07Aug2002 
+Started including and testing basic compiler.  No interpreting basic yet
+but able to compile and run (via GO) a basic program that blinks an led
+with an appropriate delay.
+   No assignments yet, but can run basic subroutines from the command
+line.  No GOSUB required.  Restored MS timer and PULSEOUT, though need
+to test PULSEOUT.
+
+*** 08Aug2002 
+Added STACK so that BASIC subroutines can pass parameters on the stack
+just like Forth subroutines.
+
+*** 09Aug2002 
+Added LET including infix operators to the command line.
+
+*** 13Aug2002 
+Separated (most of) amrbasic.tcl from amrforth.tcl.  Made BASIC errors
+show using the ERROR command in Tcl, which is like ABORT" in Forth.
+
+*** 14Aug2002 
+Can now execute the selection, if it exists, by pressing enter key.
+
+*** 20Aug2002 
+Words now sorts the list by order of the address in the array in
+descending order.  In other words, last word defined is at top of list,
+as in normal forth.
+
+*** 21Aug2002 
+Added a browser window beneath the interpreter.  Starts with job file
+displayed, but can display any file.  Editing is disabled at this point,
+but should eventually be enabled and fleshed out.
+
+*** 27Aug2002 
+The ADuC816 works now, the final straw was the need to initialize the
+clockspeed with the following line in COLD:
+	has ADuC816 [if]
+		0 # $D7 direct ( PLLCON) mov   \ Run at 12.582912 Mhz
+	[then]
+Also had to change the frequency and TH1 defaults for the 812.  In the
+near future must allow user to change those values during config.
+
+** 17Sep2002 
+Today the F017 board worked and so did its downloader at 24.5 MHz.  The
+options for frequency and baudrate work correctly now too for the F300
+and F000 chips from Cygnal.
+
+** 23Sep2002 
+Changed run-editor and run-compiler to exec a shell, so I can compile a
+program and stay in gforth to run the disassembler or to view errors.
+Also I can shell out to Vim and edit conveniently then come back and
+recompile.  At this point it only works for Linux and aterm, need to
+extend to Windows and allow user to choose own terminal program.
+
+** 11Oct2002 
+Now run-compiler exec's a shell but doesn't compile until you type t for
+test or r for rom.  Before the shell was quitting on any error and the
+message wasn't readable.  Rearranged the user interface a bit.  No more
+control+.. accelerators.  Host forth compiles when you type cc and
+downloads when you type dd.  Much easier to use.
+
+** 15Oct2002 
+Restored efficient tail recursion.  Don't know when it was disabled nor
+why, but now every CALL leaves its hint for the optimizer, and every
+EXIT uses the hint to optimize the call into jump if possible.  Also
+added hide to ... NEXT in the assembler and to THEN in forth.  The other
+branching words naturally hide the optimization.
+
+** 23Oct2002 
+Got system working in Windows again, including the jtag downloader.
+
+** 28Oct2002 
+Removed the project file in amrforth/v6 directory.  Now you start amrf
+in the project directory instead.  That way more than one project can be
+'active' at a time.  Just don't run them simultaneously unless they use
+different serial ports.
+
+
+*************************************************
+OLD_TODO
+
+\ TODO on amrForth v6
+
+* Window header.  (What does this mean again?)
+
+* Work out the installation plan.  Gforth needs to be in the path for
+  windows or we need to know how to call it directly from tcl.  If the
+  user has tcl or gforth in a directory other than what we expect it could
+  cause trouble.  Why doesn't gforth change the path in autoexec.bat as
+  tcl does?
+
+* Add the old disassembler, but use it similar to the interpreter.  How
+  does the disassembler know where the end of a word is?
+
+* Add a single step debugger, based on patching NEXT and EXIT.
+
+done 6/28/02
+*** Let tcl read the symbol table and do the interpreting itself,
+    without calling gforth.  That should speed things up a lot.
+
+done 6/28/02  escape key and button
+* Currently locks up if no target connected and you try to download.
+  Need an escape hatch or timeout.
+
+done 6/28/02
+* Integrate interpreter into the text object, eliminate separate entry
+  box.
+* Maybe same as above, but if the user types too fast into the entry
+  box, he gets ahead of the interpreter and it gets confused.
+
+done 7/03/02  Also other host words, such as bye, in a dictionary.
+* Add words.
+
+done 7/8/02
+* Project
+
+done 7/9/02  ADuc816,812
+* Add other processors.  KEEP IT SIMPLE.
+
+done 7/9/02  4 choices: 10, 12, 14, 16 point courier.
+* Change font, make it larger.
+
+done 7/9/02
+* Allow user to configure for other serial ports.
+* Add menus, including PREFERENCES where the font and the comport can be
+  chosen and remembered.
+
+done
+* Bootloader for the C80510300 part.  (Need a 300 part to test on)
+
+done
+* Special BASIC interpreter.
+

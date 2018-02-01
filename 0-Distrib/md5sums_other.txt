@@ -1,0 +1,6 @@
+ff090a9e666f7a328a2506326b186639  amrforth-v6_4-linux-02Aug04.tar.gz
+9b046e5edd708ef5924670e6e44d13cd  archive_dot_org_saves.txt
+d0b012d52ef8c909a1f8e1157cb01018  history.txt
+06e403a5a52a8a6a8309fbc99d2b73bf  install-amr
+0a7b158ba800c0386509bbadcee22b8e  readme.linux
+0f7979782c5d15ede397a31504967080  readme.txt

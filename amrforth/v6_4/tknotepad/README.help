@@ -1,0 +1,70 @@
+File
+        New             Creates a new file, may prompt to 
+			delete the contents of the window.
+        Open            Opens a new file, will delete the 
+			contents of the current window may 
+			prompt.
+        Save            Saves a file, if this is a new file 
+			it will bring up the Save As window.
+        Save As         Save a new file or save a file as a 
+			different file, should prompt before 
+			overwriting an existing file.
+        Print Setup     Allows the user to edit the default 
+			print setup. Defaults to lpr /tmp/tknoteprint.
+			This is not saved. Hitting Return selects Ok,
+			Esc will Cancel.
+        Print           Executes the print command without prompting.
+        Exit            Exits program may prompt.
+
+Edit
+        Undo            Undo's last command. (virtually) UNLIMITED undo.
+        Redo            Redo's last command. (virtually) UNLIMITED redo.
+        Cut             Cut's selected text.
+        Copy            Copies selected text.
+        Paste           Pastes text in the buffer.
+        Delete          Deletes selected text.
+        Select All      Selects all the text in the text area.
+        Time/Date	Prints the time and date at the cursor 
+			position in the format of -> 14:53 PM 01/06/99 .
+        Word Wrap 	Turns on the word wrap in the text area, but 
+			DOES NOT create new lines in doing so.
+			This means that one line with word wrap on 
+			could get to be very long. Same behavior as 
+			seen in vi.
+
+Search
+        Find            Find text in text area. Default is down. 
+			Can match the case. If focus is on the find 
+			window then Return will do the next find and 
+			Esc will cancel.
+        Find Next       If the find window was brought up then it will 
+			find the next instance of the last find. 
+        Replace         Replaces one text with new text.
+			If focus is on the find window then Return 
+			will do the next replace and Esc will cancel.
+
+Help
+        Help            Prints a message directing you to this file.
+        About           Brings up information on this program. Version number and Author.
+
+
+	If a letter is underlines then it has a default binding. The menu bindings 
+	are Alt-F for the file menu on Windows and Linux. Or Alt-f-o or ontrol-o 
+	to bring up the open window. The open window then has its own default bindings
+	such as Alt-D and Alt-l. There are many more bindings.
+
+Questions, comments or suggestions about this document please send email to me:
+
+Joseph Acosta
+joeja@mindspring.com
+
+
+
+
+
+
+
+
+
+
+

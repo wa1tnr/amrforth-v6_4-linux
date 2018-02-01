@@ -1,0 +1,2 @@
+ba3e530214410d88c696483e7dda6ec1  amrforth-v6_4-linux-02Aug04Rc.tar
+5af3f3f86c3862336e69fecdddf8ee49  amrforth-v6_4-linux-02Aug04Rc.tar.gz

@@ -1,0 +1,13 @@
+#! /bin/sh
+qdist ./300/jtag/ $1
+qdist ./300/boot/ $1
+qdist ./300/example/ $1
+qdist ./300/basic/ $1
+qdist ./310/boot/ $1
+qdist ./310/example/ $1
+qdist ./017/basic/ $1
+qdist ./017/boot/ $1
+qdist ./017/example/ $1
+qdist ./061/boot/ $1
+qdist ./061/example/ $1
+qdist ./552/example/ $1

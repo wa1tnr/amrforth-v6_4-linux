@@ -1,0 +1,92 @@
+***** Release Note 20May04 *****
+*****     Version 6.4      *****
+ 
+If by chance you have either Tcl/Tk or Gforth installed, don't bother
+reinstalling them.  Chances are you already have Tcl/Tk installed.  If
+not your Linux distribution almost certainly contains Tcl/Tk so find
+your CD and install from that.  If not you can get Tck/Tk from the web
+at:
+
+   http://aspn.activestate.com/ASPN/Downloads/ActiveTcl/
+
+You may also have Gforth on your Linux distribution, SuSE for example
+includes it.  The latest version can also be found on the web at:
+
+   http://www.complang.tuwein.ac.at/forth/gforth/
+
+If you can't install Tcl/Tk via your Linux distribution, get it from the
+website mentioned above.  It is not included on the amrForth CD.  You
+will end up with a file named something like:
+
+   ActiveTcl8.4.5.0-linux-ix86-83070.tar.gz
+
+The version number will change as time passes.  Run this file from the
+directory it was downloaded into from the web and follow directions.
+You will be better off if you use the suggested folders or directories
+to install to.  Otherwise you will need to do some editing to get things
+working.  Tcl is what gives us a graphical user interface and access to
+the serial ports.
+
+To install Gforth either get it from the website mentioned above or from
+the amrForth CD.  The file is named something like:
+
+   gforth-0.6.2.bin.i386-pc-linux-gnu.tar.gz
+
+The version number will change as time passes.  Be sure to get the one
+ending in .tar.gz for the Linux environment.  Copy that file into your
+home directory and untar it with:
+
+   tar -xvzf gforth-0.6.2.bin.i386-pc-linux-gnu.tar.gz.
+
+which will create subdirectories off you home directory.  To finally
+install Gforth, cd to ~/gforth-0.6.2, su to root, and run
+'make install'.  That should do it.
+
+To get the latest version of amrforth go to the AM Research website at:
+
+   http://www.amresearch.com/
+
+and click on SOFTWARE, then amrFORTH_V6, then Download s/w Linux and
+click on the most recent version of amrforth-v6_4-linux-xxxxxxx.zip and
+amr-install.  Install amrforth by running amr-install either from the
+AMR CD or from the directory you downloaded it into.  amr-install is
+just a script file that runs tar with the correct options on
+amrforth-v6_4-linux-xxxxxxx.zip in order to put amrforth into the right
+path.  You need to have both files downloaded into the same directory,
+or use the CD.  Of course you also need to be able to run tar on your
+system.  
+
+Finally you need a way to start amrforth (and/or amrBASIC).  The easiest
+way might be to start a shell window and use the command line.  For
+example cd to ~/amrforth/v6_4/300/example.  From there run amrf and you
+should see the amrForth GUI.  To configure, pulldown the OPTIONS menu
+and choose CONFIGURE or type config at the command line.  Choose the
+appropriate processor and comm port.  Then make your choice of font size
+and colors from the Schema menu.  Finally choose save in the config
+dialog and from the options menu.
+
+There are three ways to download code depending on where it is going.
+Once the serial bootloader is installed you always download code either
+via the compile/download_rs232 menu or bye typing d at the command
+line.  Press reset on the target machine to invoke the serial
+downloader.
+
+The serial bootloader is installed at the factory so you may never need
+to use the JTAG or C2 downloaders.  If you do need to install a serial
+bootloader you will need to have the JTAG program installed in an f300
+in the JTAG slot of the motherboard.  At the least you need a serial
+bootloader in the f300 in this slot.  You can install the JTAG converter
+program by cd'ing to ~/amrforth/v6_4/300/jtag/ and configuring in amrf.
+Use the t command to compile the turnkey jtag converter, then download the
+program using /compile/download_rs232 or d.
+
+Now be sure to have an f017, f310 or an f300 in the appropriate slot in
+the motherboard.  Test the JTAG converter by choosing jtag/dump for the
+f017 or c2/dump for the f300 or f310.  You should see a hex dump of the
+lowest page in memory on the target.  The jtag dump is 512 bytes and the
+C2 dump is 256 bytes.  See more pages by choosing jtag/next or c2/next.
+If the dump works you can install the serial bootloader by choosing
+jtag/download for the f017 or c2/download for the f300 or f310.  Use the
+dump and next to verify the download occurred.  Now you should be able
+to switch from the jtag serial port to the target serial port and
+download programs via the serial bootloader.

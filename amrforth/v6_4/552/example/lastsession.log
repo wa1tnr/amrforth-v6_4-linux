@@ -1,0 +1,15 @@
+Mon Mar 15 11:23:13 AM PST 2004
+/home/prog/amrforth/v6_3/552/example
+amrForth v6.3.0 11MAR04
+Loading configuration files.
+Forth> c Compiling Interactive System
+
+ROM-START=32891 
+
+Host Stack = <0> 
+ROM used = 36145 $8D31 
+
+Forth> d 80c552 downloader.
+Downloading rom.bin via RS232
+.......
+Forth> bye 

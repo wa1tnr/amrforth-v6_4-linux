@@ -1,0 +1,12 @@
+set browser "konqueror"
+set fgColor "#000000"
+set bgColor "#e8ebf3"
+set fgTargetColor "#0609fe"
+set cursorColor "#302ce9"
+set hlColor "#7908f7"
+set default_size 14
+set main_height 493
+set main_width 618
+set main_percent 0.797160243403
+set orientation vertical
+set mode "Forth"

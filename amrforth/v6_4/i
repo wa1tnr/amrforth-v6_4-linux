@@ -1,0 +1,3 @@
+#! /bin/sh
+gforth -m 1M ~/amrforth/v6/interpret.fs -e go
+

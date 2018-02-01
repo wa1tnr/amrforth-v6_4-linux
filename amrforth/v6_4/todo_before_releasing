@@ -1,0 +1,8 @@
+The disassembler should handle any inline strings, such as in s" or ."
+if they are included in the kernel.
+
+The single stepper needs to be able to skip over inline strings.
+
+The single stepper needs to handle such words as dup0=until which are
+optimized for speed.
+

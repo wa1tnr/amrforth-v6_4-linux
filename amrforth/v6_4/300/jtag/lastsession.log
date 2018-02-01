@@ -1,0 +1,59 @@
+Thu Jun 17 09:31:51 AM PDT 2004
+/home/prog/amrforth/v6_4/300/jtag
+amrForth v6.4.x 17MAY04
+Loading configuration files.
+Host> t Compiling Turnkey System
+
+ROM-START=611 
+
+#
+.s
+.
+dup
+drop
+swap
++
+*
+-
+/
+mod
+2mhz
+11mhz
+24mhz
+s
++k
+-k
+o@
+i!
+run
+halt
+reset
+suspend
+dump
+rs
+ls
+erase0
+erase-all
+c!
+c@
+compare
+jtag
+dump
+next
+C2next
+C2dump
+C2erase
+C2download
+Host Stack = <0> 
+ROM used = 4785 $12B1 
+redefined read-byte  redefined write-byte  
+
+Host> d 
+    To download to the target,
+press and hold RESET on the target board,
+then press the SPACE key...
+    Now release the RESET button.
+Cygnal downloader.
+Downloading rom.bin via RS232
+512 byte pages: 09 08 07 06 05 04 03 02 01 
+Host> bye 

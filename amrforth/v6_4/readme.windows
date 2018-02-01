@@ -1,0 +1,117 @@
+***** Release Note 03Aug04 *****
+*****     Version 6.4      *****
+
+Gforth version 0.6.2 has been updated such that it now works correctly
+in Windows 95, 98, and ME.  We now recommend using Gforth 0.6.2.
+
+***** Release Note 20May04 *****
+*****     Version 6.4      *****
+ 
+If by chance you have either Tcl/Tk or Gforth installed, don't bother
+reinstalling them.  Chances are you don't have either one, so they are
+provided on a CD, and are available over the Internet as well.
+
+For Windows users, both Tcl/Tk and Gforth come with self installing
+files.  Use the tested version on the CD, or to get the most recent
+version of Tcl/Tk go to :
+
+   http://aspn.activestate.com/ASPN/Downloads/ActiveTcl/
+
+and follow instructions for downloading.  You will end up with a file
+named something like:
+
+   ActiveTcl8.4.5.0-win32-ix86.exe
+
+The version number will change as time passes.  Run this file either
+from the AMR CD or from the directory it was downloaded into from the
+web and follow direction.  You will be better off if you use the
+suggested folders or directories to install to.  Otherwise you will need
+to do some editing to get things working.  Tcl is what gives us a
+graphical user interface and access to the serial ports.
+
+Use Gforth version 0.5.0 on the CD, or to get the most recent version of
+Gforth go to:
+
+   http://www.complang.tuwein.ac.at/forth/gforth/
+
+and get the file named:
+
+   gforth-0.5.0.exe
+
+Version 0.6.2 has some problems in the Windows environment that make it
+difficult to use with amrFORTH.  We recommend using version 0.5.0 until
+further notice.
+
+To get the latest version of amrforth go to the AM Research website at:
+
+   http://www.amresearch.com/
+
+and click on SOFTWARE, then amrFORTH_V6, then Download s/w Windows and
+click on the most recent version of amrforth-v6-windows-xxxxxxx.zip and
+amr-install.bat, and unzip.exe.  Install amrforth by running
+amr-install.bat either from the AMR CD or from the directory you
+downloaded it into.  amr-install.bat is just a batch file that runs
+unzip with the correct options on amrforth-v6_4-windows-xxxxxxx.zip in
+order to put amrforth into the right path.  You need to have all three
+files downloaded into the same directory, or use the CD.
+Alternatively you can use winZIP or another unzip program.  Just be sure
+to use the path \amrforth\v6_4\ or the other scripts won't work.
+
+Finally you need a way to start amrforth (and/or amrBASIC).  Add a
+shortcut to the desktop that starts amrf.bat.  One way to do this is to
+use explorer and create a shortcut for AMRF.BAT.  Rename the shortcut to
+something like amrForth.  Edit its properties so that its target is:
+
+   C:\AMRFORTH\V6_4\300\EXAMPLE\AMRF.BAT
+
+and it starts in:
+
+   C:\AMRFORTH\V6_4\300\EXAMPLE\
+
+Now when you click on the shortcut icon a window should appear labeled:
+
+   amrForth v6.4.x
+
+You will want to create a separate icon for each project directory you
+have.  An alternative is to start amrf from a DOS shell.  CD to the
+project directory, e.g. c:\amrforth\v6_4\300\example as above, then type
+amrf to run the amrf.bat file.
+
+Finally you can try out amrForth v6.4.  Source code is included for the
+serial bootloaders for Cygnal f300 and f017 chips, as well as the JTAG
+converter for the f300 and some simple test code.  These are in the
+\amrforth\v6_4\300 and \amrforth\v6_4\017 directories.  From a DOS shell
+cd to \amrforth\v6_4\300\example and run the amrf.bat script.  You should
+see the amrForth v6 GUI, telling you to configure.  Pulldown the OPTIONS
+menu and choose CONFIGURE or type config at the command line.  Choose
+the appropriate processor and comm port.  Then make your choice of font
+size and colors from the Schema menu.  Finally choose save in the config
+dialog and 'Save Look and Feel' from the options menu.
+
+There are three ways to download code depending on where it is going.
+Once the serial bootloader is installed you always download code either
+via the compile/download_rs232 menu or bye typing d at the command
+line.  Press reset on the target machine to invoke the serial
+downloader.
+
+The serial bootloader is installed at the factory so you may never need
+to use the JTAG or C2 downloaders.  If you do need to install a serial
+bootloader you will need to have the JTAG program installed in an f300
+in the JTAG slot of the motherboard.  At the least you need a serial
+bootloader in the f300 in this slot.  You can install the JTAG converter
+program by cd'ing to \amrforth\v6_4\300\jtag and configuring in
+amrf.bat.  Use the t command to compile the turnkey jtag converter, then
+download the program using /compile/download_rs232 or d.
+
+Now be sure to have an f017, f310 or an f300 in the appropriate slot in
+the motherboard.  Test the JTAG converter by choosing jtag/dump for the
+f017 or c2/dump for the f300.  You should see a hex dump of the lowest
+page in memory on the target.  The jtag dump is 512 bytes and the C2
+dump is 256 bytes.  See more pages by choosing jtag/next or c2/next.  If
+the dump works you can install the serial bootloader by choosing
+jtag/download for the f017 or c2/download for the f300 or f310.  Use the
+dump and next to verify the download occurred.  Now you should be able
+to switch from the jtag serial port to the target serial port and
+download programs via the serial bootloader.
+
+

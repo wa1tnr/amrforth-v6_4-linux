@@ -1,0 +1,9 @@
+#! /bin/sh
+if check amrfconf.fs ./300/example/
+then
+	echo $?
+	echo " THEN "
+else
+	echo $?
+	echo " ELSE "
+fi

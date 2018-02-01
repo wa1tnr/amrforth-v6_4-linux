@@ -1,0 +1,6 @@
+#! /usr/local/bin/gforth
+: day  ( n - ) 0 <# # # #> type ;
+: year  ( n - ) -2000 + day ;
+create months ,"   JANFEBMARAPRMAYJUNJULAUGSEPOCTNOVDEC"
+: month  ( n - ) 3 * months + 3 type ;
+.( set datelog ) time&date rot day swap month year cr bye

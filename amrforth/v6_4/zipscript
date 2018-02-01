@@ -1,0 +1,2 @@
+zip -r amrforth-v6_4-windows-$(date +%d%b%y).zip ./amrforth/*
+cp amrforth-v6_4-windows-$(date +%d%b%y).zip ~/release/

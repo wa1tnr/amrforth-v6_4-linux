@@ -1,0 +1,2 @@
+#! /bin/sh
+gforth -m 1M -e false ./compile.fs -e quit

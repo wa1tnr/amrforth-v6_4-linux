@@ -1,0 +1,66 @@
+https://web.archive.org/web/*/www.amresearch.com
+
+https://web.archive.org/web/20031207063441/http://www.amresearch.com:80/v6/index.html
+
+https://web.archive.org/web/20031219062153/http://www.amresearch.com:80/v6/linux/
+
+https://web.archive.org/web/*/http://www.amresearch.com/v6/linux/V6.4/amrforth-v6_4-linux-02Aug04.tar.gz
+
+
+
+
+
+
+https://web.archive.org/web/*/http://www.amresearch.com:80/v6/linux/*
+
+46 URLs have been captured for this domain.
+Filter results (i.e. '.txt'):
+URL	MIME Type	From	To	Captures	Duplicates	Uniques
+http://www.amresearch.com/v6/linux/V6.2/amrforth-v6-linux-30Oct03.tar.gz	application/x-gzip	May 6, 2006	May 12, 2006	2	0	2
+http://www.amresearch.com/v6/linux/V6.2/gforth-0.5.0-i386-pc-linux-gnu.tar.gz	application/x-gzip	May 6, 2006	May 6, 2006	1	0	1
+http://www.amresearch.com/v6/linux/V6.3/amrforth-v6.3-linux-16Jan04.tar.gz	application/x-gzip	May 6, 2006	May 6, 2006	1	0	1
+http://www.amresearch.com/v6/linux/V6.3/amrforth-v6_3-linux-06Feb04.tar.gz	application/x-gzip	May 6, 2006	May 12, 2006	2	0	2
+http://www.amresearch.com/v6/linux/V6.3/gforth-0.5.0-i386-pc-linux-gnu.tar.gz	application/x-gzip	May 6, 2006	May 6, 2006	1	0	1
+http://www.amresearch.com/v6/linux/V6.4/amrforth-v6_4-linux-02Aug04.tar.gz	application/x-gzip	May 6, 2006	May 6, 2006	1	0	1
+http://www.amresearch.com:80/v6/linux/history.html	text/html	Apr 22, 2003	Apr 22, 2003	1	0	1
+http://www.amresearch.com:80/v6/linux/install-amr	text/plain	Oct 15, 2003	Dec 23, 2003	2	0	2
+http://www.amresearch.com:80/v6/linux/unzip.exe	application/octet-stream	Oct 15, 2003	Oct 15, 2003	1	0	1
+http://www.amresearch.com:80/v6/linux/V6.2/	text/html	Apr 22, 2004	Oct 25, 2006	9	5	4
+http://www.amresearch.com:80/v6/linux/V6.2/?D=A	text/html	May 4, 2004	May 12, 2006	8	4	4
+http://www.amresearch.com:80/v6/linux/V6.2/?D=D	text/html	May 6, 2004	May 20, 2006	6	2	4
+http://www.amresearch.com:80/v6/linux/V6.2/?M=A	text/html	Jul 1, 2004	May 6, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.2/?M=D	text/html	May 6, 2004	Feb 19, 2005	6	3	3
+http://www.amresearch.com:80/v6/linux/V6.2/?N=A	text/html	May 6, 2004	May 20, 2006	7	3	4
+http://www.amresearch.com:80/v6/linux/V6.2/?N=D	text/html	May 4, 2004	May 12, 2006	8	4	4
+http://www.amresearch.com:80/v6/linux/V6.2/?S=A	text/html	May 4, 2004	May 6, 2006	7	3	4
+http://www.amresearch.com:80/v6/linux/V6.2/?S=D	text/html	Sep 6, 2004	Feb 19, 2005	4	1	3
+http://www.amresearch.com:80/v6/linux/V6.2/history.txt	text/plain	Jul 5, 2004	May 12, 2006	7	4	3
+http://www.amresearch.com:80/v6/linux/V6.2/install-amr	text/plain	May 4, 2004	May 6, 2006	7	4	3
+http://www.amresearch.com:80/v6/linux/V6.3/	text/html	Mar 12, 2004	Oct 25, 2006	10	5	5
+http://www.amresearch.com:80/v6/linux/V6.3/?D=A	text/html	May 4, 2004	May 6, 2006	7	3	4
+http://www.amresearch.com:80/v6/linux/V6.3/?D=D	text/html	May 6, 2004	Feb 19, 2005	5	2	3
+http://www.amresearch.com:80/v6/linux/V6.3/?M=A	text/html	May 4, 2004	May 12, 2006	7	3	4
+http://www.amresearch.com:80/v6/linux/V6.3/?M=D	text/html	May 6, 2004	May 20, 2006	6	2	4
+http://www.amresearch.com:80/v6/linux/V6.3/?N=A	text/html	May 6, 2004	May 20, 2006	6	2	4
+http://www.amresearch.com:80/v6/linux/V6.3/?N=D	text/html	May 5, 2004	May 6, 2006	7	3	4
+http://www.amresearch.com:80/v6/linux/V6.3/?S=A	text/html	May 5, 2004	May 12, 2006	6	2	4
+http://www.amresearch.com:80/v6/linux/V6.3/?S=D	text/html	May 6, 2004	May 20, 2006	6	2	4
+http://www.amresearch.com:80/v6/linux/V6.3/history.txt	text/plain	May 5, 2004	May 12, 2006	8	5	3
+http://www.amresearch.com:80/v6/linux/V6.3/install-amr	text/plain	May 5, 2004	May 6, 2006	7	4	3
+http://www.amresearch.com:80/v6/linux/V6.3/readme.linux	text/plain	May 5, 2004	May 12, 2006	7	4	3
+http://www.amresearch.com:80/v6/linux/V6.3/readme.txt	text/plain	May 5, 2004	May 6, 2006	6	3	3
+http://www.amresearch.com:80/v6/linux/V6.4/	text/html	Aug 26, 2004	Oct 25, 2006	7	3	4
+http://www.amresearch.com:80/v6/linux/V6.4/?D=A	text/html	Sep 6, 2004	May 6, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.4/?D=D	text/html	Sep 21, 2004	Feb 20, 2005	4	1	3
+http://www.amresearch.com:80/v6/linux/V6.4/?M=A	text/html	Sep 6, 2004	May 12, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.4/?M=D	text/html	Sep 21, 2004	May 20, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.4/?N=A	text/html	Sep 21, 2004	May 20, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.4/?N=D	text/html	Sep 6, 2004	May 6, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.4/?S=A	text/html	Sep 6, 2004	May 12, 2006	5	1	4
+http://www.amresearch.com:80/v6/linux/V6.4/?S=D	text/html	Sep 21, 2004	Oct 30, 2004	2	0	2
+http://www.amresearch.com:80/v6/linux/V6.4/history.txt	text/plain	Sep 6, 2004	May 12, 2006	5	2	3
+http://www.amresearch.com:80/v6/linux/V6.4/install-amr	text/plain	Sep 6, 2004	May 6, 2006	5	2	3
+http://www.amresearch.com:80/v6/linux/V6.4/readme.linux	text/plain	Sep 6, 2004	May 12, 2006	6	3	3
+http://www.amresearch.com:80/v6/linux/V6.4/readme.txt	text/plain	Sep 6, 2004	May 6, 2006	5	2	3
+
+

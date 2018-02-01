@@ -1,0 +1,11 @@
+set kernelword(dup) 636
+set kernelword(drop) 644
+set kernelword(flip) 662
+set kernelword(cfetchp) 786
+set kernelword(minus) 840
+set kernelword(not) 1036
+set kernelword(push) 1076
+set kernelword(pop) 1091
+set kernelword(emit) 1190
+set kernelword(count) 1409
+set kernelword(dots) 1842
