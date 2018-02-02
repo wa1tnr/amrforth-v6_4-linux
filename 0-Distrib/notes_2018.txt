@@ -1,0 +1,29 @@
+amrFORTH was designed around Gforth.
+
+Gforth 0.5.0 or thereabouts was used until near versions 4, 5, or 6;
+(don't have that information on-hand at the time of this writing).
+
+amrFORTH v7 definitely had the newer Gforth (near 0.6.0, perhaps?)
+
+
+Gforth, in 2018 reports
+
+ $ gforth
+Gforth 0.7.2, Copyright (C) 1995-2008 Free Software Foundation, Inc.
+Gforth comes with ABSOLUTELY NO WARRANTY; for details type `license'
+Type `bye' to exit
+
+Gforth 0.6.x was the one used with the newest version(s) of amrFORTH.
+
+Where newer Gforth was unavailable, reversion to an earlier variant
+of amrFORTH was one way to work around this limit.  In that case,
+Gforth 0.5.0 (or similar) was used.
+
+It's possible the main difference was in the handling of the 
+hardware serial ports on the host PC running Linux.  amrFORTH
+was built around machines that had DB-9 (9-pin) serial ports
+that used RS-232 to communicate with the AMR stamp motherboard
+(via a pair of RJ-45 jacks).
+
+
+
