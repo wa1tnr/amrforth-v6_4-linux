@@ -1,0 +1,10 @@
+
+The differences between the contents of this file and pulished
+code from AM Research are my own ideas, and came directly from
+the earlier F300-based 'JTAG Stamp' code, from AM Research.
+
+Here then is an F330-D (DIP-20!) based JTAG for the amrFORTH system.
+
+Deposited here in 2018 by wa1tnr.  LICENSE mirrors whatever was
+in place for amrFORTH itself (generally: LGPL v2.1).
+

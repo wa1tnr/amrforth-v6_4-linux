@@ -1,0 +1,2 @@
+a458dd9aceddf0a28dcbcc430911b712  amrforth_v7_2012+F330+JTAG_revived-r0.tar
+4e155a6356b59f05e14ef02dc5fc25a9  amrforth_v7_2012+F330+JTAG_revived-r0.tar.gz
